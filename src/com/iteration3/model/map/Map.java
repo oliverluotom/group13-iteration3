@@ -28,6 +28,7 @@ public class Map {
         rivers.put(l,r);
     }
 
+    //TODO: FIX LOD VIOLATION
     public boolean validateRiverLocation(Location l, River r){
         //Surrounding Check Center
         if (rivers.containsKey(l.getNorth())) {
@@ -84,12 +85,18 @@ public class Map {
                         return false;
                     }
                 }
+                else if(tiles.containsKey(l.getNorth())){
+                    return false;
+                }
             }
             else if(holder == 2){
                 if(rivers.containsKey(l.getNorthEast())){
                     if(!rivers.get(l.getNorthEast()).getRiverEdges().contains(5)){
                         return false;
                     }
+                }
+                else if(tiles.containsKey(l.getNorthEast())){
+                    return false;
                 }
             }
             else if(holder == 3){
@@ -98,12 +105,18 @@ public class Map {
                         return false;
                     }
                 }
+                else if(tiles.containsKey(l.getSouthEast())){
+                    return false;
+                }
             }
             else if(holder == 4){
                 if(rivers.containsKey(l.getSouth())){
                     if(!rivers.get(l.getSouth()).getRiverEdges().contains(1)){
                         return false;
                     }
+                }
+                else if(tiles.containsKey(l.getSouth())){
+                    return false;
                 }
             }
             else if(holder == 5){
@@ -112,12 +125,18 @@ public class Map {
                         return false;
                     }
                 }
+                else if(tiles.containsKey(l.getSouthWest())){
+                    return false;
+                }
             }
             else if(holder == 6){
                 if(rivers.containsKey(l.getNorthWest())){
                     if(!rivers.get(l.getNorthWest()).getRiverEdges().contains(3)){
                         return false;
                     }
+                }
+                else if(tiles.containsKey(l.getNorthWest())){
+                    return false;
                 }
             }
         }
