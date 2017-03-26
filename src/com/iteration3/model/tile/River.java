@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class River {
 
-    // 7 is NorthWest, 8 is North, 9 is NorthEast, 1 is SouthWest, 2 is South, 3 is SouthEast
+    // 1 is North, 2 is NorthEast, 3 is SouthEast, 4 is South, 5 is SouthWest, 6 is NorthWest
     private ArrayList<Integer> riverEdges;
 
     // Constructors for river types with various number of edges
@@ -36,46 +36,46 @@ public class River {
 
     public void rotateCounterClockwise() {
         for(int i = 0; i < riverEdges.size(); i++) {
-            if(riverEdges.get(i) == 7) {
-                riverEdges.set(i, 1);
+            if(riverEdges.get(i) == 1) {
+                riverEdges.set(i, 6);
             }
-            else if(riverEdges.get(i) == 8) {
-                riverEdges.set(i, 7);
+            else if(riverEdges.get(i) == 6) {
+                riverEdges.set(i, 5);
             }
-            else if(riverEdges.get(i) == 9) {
-                riverEdges.set(i, 8);
+            else if(riverEdges.get(i) == 5) {
+                riverEdges.set(i, 4);
             }
-            else if(riverEdges.get(i) == 3) {
-                riverEdges.set(i, 9);
-            }
-            else if(riverEdges.get(i) == 2) {
+            else if(riverEdges.get(i) == 4) {
                 riverEdges.set(i, 3);
             }
-            else if(riverEdges.get(i) == 1) {
+            else if(riverEdges.get(i) == 3) {
                 riverEdges.set(i, 2);
+            }
+            else if(riverEdges.get(i) == 2) {
+                riverEdges.set(i, 1);
             }
         }
     }
 
     public void rotateClockwise() {
         for(int i = 0; i < riverEdges.size(); i++) {
-            if(riverEdges.get(i) == 7) {
-                riverEdges.set(i, 8);
-            }
-            else if(riverEdges.get(i) == 8) {
-                riverEdges.set(i, 9);
-            }
-            else if(riverEdges.get(i) == 9) {
-                riverEdges.set(i, 3);
-            }
-            else if(riverEdges.get(i) == 3) {
+            if(riverEdges.get(i) == 1) {
                 riverEdges.set(i, 2);
             }
             else if(riverEdges.get(i) == 2) {
-                riverEdges.set(i, 1);
+                riverEdges.set(i, 3);
             }
-            else if(riverEdges.get(i) == 1) {
-                riverEdges.set(i, 7);
+            else if(riverEdges.get(i) == 3) {
+                riverEdges.set(i, 4);
+            }
+            else if(riverEdges.get(i) == 4) {
+                riverEdges.set(i, 5);
+            }
+            else if(riverEdges.get(i) == 5) {
+                riverEdges.set(i, 6);
+            }
+            else if(riverEdges.get(i) == 6) {
+                riverEdges.set(i, 1);
             }
         }
     }
