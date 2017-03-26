@@ -1,6 +1,7 @@
 *.xml
 *.class
 out/
+out/*
 .idea/*
 group13-iteration3.iml
 *.iml
