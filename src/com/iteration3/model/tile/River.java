@@ -26,4 +26,58 @@ public class River {
         this.riverEdges.add(edge3);
     }
 
+    public ArrayList<Integer> getRiverEdges() {
+        return riverEdges;
+    }
+
+    public void setRiverEdges(ArrayList<Integer> riverEdges) {
+        this.riverEdges = riverEdges;
+    }
+
+    public void rotateCounterClockwise() {
+        for(int i = 0; i < riverEdges.size(); i++) {
+            if(riverEdges.get(i) == 7) {
+                riverEdges.set(i, 1);
+            }
+            else if(riverEdges.get(i) == 8) {
+                riverEdges.set(i, 7);
+            }
+            else if(riverEdges.get(i) == 9) {
+                riverEdges.set(i, 8);
+            }
+            else if(riverEdges.get(i) == 3) {
+                riverEdges.set(i, 9);
+            }
+            else if(riverEdges.get(i) == 2) {
+                riverEdges.set(i, 3);
+            }
+            else if(riverEdges.get(i) == 1) {
+                riverEdges.set(i, 2);
+            }
+        }
+    }
+
+    public void rotateClockwise() {
+        for(int i = 0; i < riverEdges.size(); i++) {
+            if(riverEdges.get(i) == 7) {
+                riverEdges.set(i, 8);
+            }
+            else if(riverEdges.get(i) == 8) {
+                riverEdges.set(i, 9);
+            }
+            else if(riverEdges.get(i) == 9) {
+                riverEdges.set(i, 3);
+            }
+            else if(riverEdges.get(i) == 3) {
+                riverEdges.set(i, 2);
+            }
+            else if(riverEdges.get(i) == 2) {
+                riverEdges.set(i, 1);
+            }
+            else if(riverEdges.get(i) == 1) {
+                riverEdges.set(i, 7);
+            }
+        }
+    }
+
 }
