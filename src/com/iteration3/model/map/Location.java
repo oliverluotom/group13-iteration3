@@ -26,9 +26,41 @@ public class Location {
 
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Location)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Location loc = (Location) o;
         return x == loc.getX() && y == loc.getY() && z == loc.getZ();
     }
+
+    public int hashCode(){
+        int result = x ^ (x >>> 32);
+        result = 31 * result + y ^ (y >>> 32);
+        result = 31 * result + z ^ (z >>> 32);
+        return result;
+    }
+
+    public Location getNorth(){
+        return new Location(this.x, this.y+1, this.z-1);
+    }
+
+    public Location getNorthEast(){
+        return new Location(this.x+1, this.y, this.z-1);
+    }
+
+    public Location getNorthWest(){
+        return new Location(this.x-1, this.y+1, this.z);
+    }
+
+    public Location getSouth(){
+        return new Location(this.x, this.y-1, this.z+1);
+    }
+
+    public Location getSouthEast(){
+        return new Location(this.x+1, this.y-1, this.z);
+    }
+
+    public Location getSouthWest(){
+        return new Location(this.x-1, this.y, this.z+1);
+    }
+
 }
 
