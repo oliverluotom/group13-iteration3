@@ -23,7 +23,10 @@ public class Map {
     }
 
     public void addRiverToMap(Location l, River r) {
+        // TODO: validate
         rivers.put(l,r);
     }
+
+
 
 }
