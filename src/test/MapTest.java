@@ -1,5 +1,3 @@
-package test;
-
 import com.iteration3.model.map.Location;
 import com.iteration3.model.map.Map;
 import com.iteration3.model.map.MapFileManager;

@@ -1,6 +1,7 @@
 package com.iteration3.model.map;
 
 import com.iteration3.model.tile.River;
+import com.iteration3.model.tile.TerrainTypeVisitor;
 import com.iteration3.model.tile.Tile;
 
 import java.util.ArrayList;
@@ -26,10 +27,24 @@ public class Map {
     }
 
     public void addRiverToMapFromFile(Location l, River r) {
-        if(validateLocation(l)) {
+        if(validateLocation(l) && !isSeaTile(l)) {
             rivers.put(l, r);
         }
     }
+
+    public void addTileToMapFromGUI(Location l, Tile t) {
+        if(validateLocation(l) && validateLocation(l)) {
+            tiles.put(l,t);
+        }
+    }
+
+    public void addRiverToMapFromGUI(Location l, River r) {
+        if(validateLocation(l) && validateRiverLocation(l, r) && !isSeaTile(l)) {
+            rivers.put(l, r);
+        }
+    }
+
+
 
     public boolean validateLocation(Location location) {
         if(location.getX() > Math.abs(10) || location.getY() > Math.abs(10) || location.getZ() > Math.abs(10)) {
@@ -38,6 +53,13 @@ public class Map {
         } else {
             return true;
         }
+    }
+
+    private boolean isSeaTile(Location l) {
+        if(tiles.get(l).getTerrain().getTerrainType(new TerrainTypeVisitor()) == "sea") {
+            return true;
+        }
+        return false;
     }
 
     //TODO: FIX LOD VIOLATION
@@ -101,7 +123,7 @@ public class Map {
                         return false;
                     }
                 }
-                else if(tiles.containsKey(l.getNorth())){
+                else if(tiles.containsKey(l.getNorth()) && !isSeaTile(l.getNorth())){
                     return false;
                 }
             }
@@ -111,7 +133,7 @@ public class Map {
                         return false;
                     }
                 }
-                else if(tiles.containsKey(l.getNorthEast())){
+                else if(tiles.containsKey(l.getNorthEast()) && !isSeaTile(l.getNorthEast())){
                     return false;
                 }
             }
@@ -121,7 +143,7 @@ public class Map {
                         return false;
                     }
                 }
-                else if(tiles.containsKey(l.getSouthEast())){
+                else if(tiles.containsKey(l.getSouthEast()) && !isSeaTile(l.getSouthEast())){
                     return false;
                 }
             }
@@ -131,7 +153,7 @@ public class Map {
                         return false;
                     }
                 }
-                else if(tiles.containsKey(l.getSouth())){
+                else if(tiles.containsKey(l.getSouth()) && !isSeaTile(l.getSouth())){
                     return false;
                 }
             }
@@ -141,7 +163,7 @@ public class Map {
                         return false;
                     }
                 }
-                else if(tiles.containsKey(l.getSouthWest())){
+                else if(tiles.containsKey(l.getSouthWest()) && !isSeaTile(l.getSouthWest())){
                     return false;
                 }
             }
@@ -151,7 +173,7 @@ public class Map {
                         return false;
                     }
                 }
-                else if(tiles.containsKey(l.getNorthWest())){
+                else if(tiles.containsKey(l.getNorthWest()) && !isSeaTile(l.getNorthWest())){
                     return false;
                 }
             }
