@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-
 /**
  * Testing map functionality
  */
@@ -46,6 +45,7 @@ public class MapTest {
         mapManager.fillTextFileFromMap();
 
     }
+
 
 
 }
