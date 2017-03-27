@@ -1,10 +1,7 @@
-import com.iteration3.model.map.Map;
-import com.iteration3.model.map.MapFileManager;
-import org.junit.Test;
+package test;
+
 
 import java.util.Iterator;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Testing map functionality
