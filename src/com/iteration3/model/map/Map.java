@@ -180,14 +180,14 @@ public class Map {
 
     public void printRivers() {
         for(Location location : rivers.keySet()) {
-            System.out.println(rivers.get(location));
+            System.out.println(rivers.get(location) + " " + Integer.toString(location.getX()) + " " +  Integer.toString(location.getY()) + " " + Integer.toString(location.getZ()));
             rivers.get(location).printRiverEdges();
         }
     }
 
     public void printTiles() {
         for(Location location : tiles.keySet()) {
-            System.out.println(tiles.get(location));
+            System.out.println(tiles.get(location) + " " + Integer.toString(location.getX()) + " " +  Integer.toString(location.getY()) + " " + Integer.toString(location.getZ()));
             System.out.println("Terrain: " + tiles.get(location).getTerrain());
         }
     }
