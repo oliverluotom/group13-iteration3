@@ -1,5 +1,3 @@
-package test;
-
 import com.iteration3.model.map.Location;
 import com.iteration3.model.map.Map;
 import com.iteration3.model.map.MapFileManager;
@@ -10,7 +8,6 @@ import com.iteration3.model.tile.WoodsTerrain;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-
 
 /**
  * Testing map functionality
@@ -48,6 +45,7 @@ public class MapTest {
         mapManager.fillTextFileFromMap();
 
     }
+
 
 
 }
