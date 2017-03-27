@@ -24,7 +24,6 @@ public class Map {
     }
 
     public void addRiverToMap(Location l, River r) {
-        // TODO: validate
         rivers.put(l,r);
     }
 
@@ -171,4 +170,11 @@ public class Map {
         return false;
     }
 
+    public HashMap<Location, Tile> getTiles() {
+        return tiles;
+    }
+
+    public HashMap<Location, River> getRivers() {
+        return rivers;
+    }
 }

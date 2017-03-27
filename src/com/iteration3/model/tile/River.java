@@ -7,6 +7,10 @@ public class River {
     // 1 is North, 2 is NorthEast, 3 is SouthEast, 4 is South, 5 is SouthWest, 6 is NorthWest
     private ArrayList<Integer> riverEdges;
 
+    public River() {
+        this.riverEdges = new ArrayList<Integer>();
+    }
+
     // Constructors for river types with various number of edges
     public River(int edge1) {
         this.riverEdges = new ArrayList<Integer>();
@@ -24,6 +28,18 @@ public class River {
         this.riverEdges.add(edge1);
         this.riverEdges.add(edge2);
         this.riverEdges.add(edge3);
+    }
+
+    // add edge if that edge isn't already in the list and if size < 3
+    public void addRiverEdge(int edge) {
+        if(this.riverEdges.size() < 3 && !riverEdges.contains(Integer.valueOf(edge))) {
+            System.out.println("Added edge: " + edge);
+            this.riverEdges.add(edge);
+        }
+    }
+
+    public void removeRiverEdge(int edge) {
+        this.riverEdges.remove(Integer.valueOf(edge));
     }
 
     public ArrayList<Integer> getRiverEdges() {

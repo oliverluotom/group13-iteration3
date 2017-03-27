@@ -1,0 +1,7 @@
+tile0 ::= 0 0 0 pasture 2
+tile1 ::= 0 1 -1 pasture
+tile2 ::= 1 0 -1 woods 5 4
+tile3 ::= 1 -1 0 woods
+tile4 ::= 0 -1 1 pasture
+tile5 ::= -1 0 1 pasture
+tile6 ::= -1 1 0 desert
