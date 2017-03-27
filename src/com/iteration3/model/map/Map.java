@@ -177,4 +177,19 @@ public class Map {
     public HashMap<Location, River> getRivers() {
         return rivers;
     }
+
+    public void printRivers() {
+        for(Location location : rivers.keySet()) {
+            System.out.println(rivers.get(location));
+            rivers.get(location).printRiverEdges();
+        }
+    }
+
+    public void printTiles() {
+        for(Location location : tiles.keySet()) {
+            System.out.println(tiles.get(location));
+            System.out.println("Terrain: " + tiles.get(location).getTerrain());
+        }
+    }
+
 }

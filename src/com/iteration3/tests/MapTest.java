@@ -1,5 +1,3 @@
-package com.iteration3.tests;
-
 import com.iteration3.model.map.Map;
 import com.iteration3.model.map.MapFileManager;
 import org.junit.Test;
@@ -13,7 +11,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class MapTest {
 
-//    // TODO: Get relative path, was not working for me
+    // TODO: Get relative path, was not working for me
 //    @Test
 //    public void testFileToMap() throws Exception{
 //        Map map = new Map();
@@ -25,6 +23,10 @@ public class MapTest {
 //        assertEquals(map.getRivers().size(), 2);
 //
 //        // need to print edges and tiles to check if they are correct
+//        map.printRivers();
+//        map.printTiles();
 //    }
+
+
 }
 

@@ -33,7 +33,6 @@ public class River {
     // add edge if that edge isn't already in the list and if size < 3
     public void addRiverEdge(int edge) {
         if(this.riverEdges.size() < 3 && !riverEdges.contains(Integer.valueOf(edge))) {
-            System.out.println("Added edge: " + edge);
             this.riverEdges.add(edge);
         }
     }
@@ -94,6 +93,10 @@ public class River {
                 riverEdges.set(i, 1);
             }
         }
+    }
+
+    public void printRiverEdges() {
+        System.out.println("Edges: " + riverEdges);
     }
 
 }
