@@ -1,9 +1,10 @@
 package com.iteration3.model.tile;
 
-public class SeaTerrain extends Terrain {
+public class SeaTerrain extends Terrain implements TerrainVisitable {
 
-    public SeaTerrain() {
-        setTerrainType("sea");
+    @Override
+    public String getTerrainType(TerrainVisitor visitor) {
+        return visitor.getType(this);
     }
 
 }
