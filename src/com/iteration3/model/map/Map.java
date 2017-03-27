@@ -45,6 +45,15 @@ public class Map {
     }
 
 
+    public boolean validateAllRiverLocations() {
+        for(Location location : rivers.keySet()) {
+            if(!validateRiverLocation(location, rivers.get(location))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public boolean validateLocation(Location location) {
         if(location.getX() > Math.abs(10) || location.getY() > Math.abs(10) || location.getZ() > Math.abs(10)) {
