@@ -18,7 +18,7 @@ public class MapTest {
     @Test
     public void testFileToMap() throws Exception{
         Map map = new Map();
-        MapFileManager mapManager = new MapFileManager(map, "/Users/acoverstone/Desktop/Skool/COP4331/group13-iteration3/src/com/iteration3/model/map/mapFileRead.txt");
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/model/map/mapFileRead.txt");
 
         mapManager.fillMapFromTextFile();
 
@@ -33,7 +33,7 @@ public class MapTest {
     @Test
     public void testMapToFile() throws Exception{
         Map map = new Map();
-        MapFileManager mapManager = new MapFileManager(map, "/Users/acoverstone/Desktop/Skool/COP4331/group13-iteration3/src/com/iteration3/model/map/mapFileWrite.txt");
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/model/map/mapFileWrite.txt");
 
         map.addTileToMapFromFile(new Location(0,0,0), new Tile(new PastureTerrain()));
         map.addTileToMapFromFile(new Location(0,0,1), new Tile(new WoodsTerrain()));
