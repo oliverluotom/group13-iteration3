@@ -4,6 +4,7 @@ import com.iteration3.model.tile.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class MapFileManager {
@@ -19,9 +20,9 @@ public class MapFileManager {
     // TODO: Methods to move map to text file and text file to map
 
     // Reads file line by line, extracts info and creates a map out of it
-    public void fillMapFromTextFile() {
+    public void fillMapFromTextFile() throws IOException{
 
-        try (BufferedReader br = new BufferedReader(new FileReader(this.pathToTextFile))) {
+            BufferedReader br = new BufferedReader(new FileReader(this.pathToTextFile));
             String line;
             // divide line and create Tile/Rivers
             while ((line = br.readLine()) != null) {
@@ -31,11 +32,6 @@ public class MapFileManager {
                 int x = Integer.parseInt(splitLine[2]);
                 int y = Integer.parseInt(splitLine[3]);
                 int z = Integer.parseInt(splitLine[4]);
-
-                if(x > Math.abs(10) || y > Math.abs(10) || z > Math.abs(10)) {
-                    System.out.println("Invalid location type");
-                    return;
-                }
 
                 Location location = new Location(x, y, z);
 
@@ -67,7 +63,7 @@ public class MapFileManager {
                 }
 
                 Tile tile = new Tile(terrain);
-                map.addTileToMap(location, tile);
+                map.addTileToMapFromFile(location, tile);
 
                 // handle rivers if they exist
                 if(splitLine.length > 6) {
@@ -75,15 +71,52 @@ public class MapFileManager {
                     for(int i = 6; i < splitLine.length; i++) {
                         river.addRiverEdge(Integer.parseInt(splitLine[i]));
                     }
-                    map.addRiverToMap(location,river);
+                    map.addRiverToMapFromFile(location,river);
                 }
 
 
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
     }
+
+
+    public void fillTextFileFromMap() throws IOException{
+        // clear file
+        FileWriter fw = new FileWriter(pathToTextFile, false);
+
+        int id = 0;
+        // go through all locations in the list of the map's tiles
+        for(Location location : map.getTiles().keySet()) {
+            // add tilename
+            String line = "";
+            line += "tile" + id + " ::= ";
+            id++;
+
+
+            // add locations and terrain
+            String x = Integer.toString(location.getX());
+            String y = Integer.toString(location.getY());
+            String z = Integer.toString(location.getZ());
+
+            line += x + " " + y + " " + z + " " + map.getTiles().get(location).getTerrain().getTerrainType(new TerrainTypeVisitor());
+
+            // add river
+            if(map.getRivers().containsKey(location)) {
+                River river = map.getRivers().get(location);
+                for(int i = 0; i < river.getRiverEdges().size(); i++) {
+                    line += " " + river.getRiverEdges().get(i);
+                }
+            }
+
+            fw.write(line + '\n');
+
+        }
+
+        fw.close();
+
+    }
+
+
 
 }
