@@ -19,16 +19,33 @@ public class Map {
         // TODO: Initialize observers
     }
 
-    public void addTileToMap(Location l, Tile t) {
-        tiles.put(l,t);
+    public void addTileToMapFromFile(Location l, Tile t) {
+        if(validateLocation(l)) {
+            tiles.put(l,t);
+        }
     }
 
-    public void addRiverToMap(Location l, River r) {
-        rivers.put(l,r);
+    public void addRiverToMapFromFile(Location l, River r) {
+        if(validateLocation(l)) {
+            rivers.put(l, r);
+        }
+    }
+
+    public boolean validateLocation(Location location) {
+        if(location.getX() > Math.abs(10) || location.getY() > Math.abs(10) || location.getZ() > Math.abs(10)) {
+            System.out.println("Invalid location type");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     //TODO: FIX LOD VIOLATION
     public boolean validateRiverLocation(Location l, River r){
+        if(rivers.size() == 0) {
+            return true;
+        }
+
         //Surrounding Check Center
         if (rivers.containsKey(l.getNorth())) {
             if(rivers.get(l.getNorth()).getRiverEdges().contains(4)){

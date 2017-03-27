@@ -1,0 +1,3 @@
+tile0 ::= 0 0 0 pasture 1
+tile1 ::= 0 0 1 woods
+tile2 ::= 0 1 -1 woods 4 1
