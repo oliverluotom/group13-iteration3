@@ -25,7 +25,7 @@ dependencies {
 sourceSets {
     main {
         java {
-            srcDirs = ["src/com.iteration3"]
+            srcDirs = ["src/main"]
         }
     }
     test {
