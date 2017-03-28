@@ -1,6 +1,6 @@
 package com.iteration3.model.tile;
 
-public interface TerrainVisitable {
+public interface iTerrainVisitable {
 
      String getTerrainType(iTerrainVisitor visitor);
 
