@@ -99,7 +99,7 @@ public class MapFileManager {
             String y = Integer.toString(location.getY());
             String z = Integer.toString(location.getZ());
 
-            line += x + " " + y + " " + z + " " + map.getTiles().get(location).getTerrain().getTerrainType(new TerrainTypeVisitor());
+            line += x + " " + y + " " + z + " " + map.getTiles().get(location).getTerrain(new TerrainTypeVisitor());
 
             // add river
             if(map.getRivers().containsKey(location)) {
