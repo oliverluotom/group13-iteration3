@@ -1,9 +1,9 @@
 package com.iteration3.model.tile;
 
-public class PastureTerrain extends Terrain implements TerrainVisitable {
+public class PastureTerrain extends Terrain implements iTerrainVisitable {
 
     @Override
-    public String getTerrainType(TerrainVisitor visitor) {
+    public String getTerrainType(iTerrainVisitor visitor) {
         return visitor.getType(this);
     }
 

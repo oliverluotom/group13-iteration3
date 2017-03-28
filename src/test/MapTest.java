@@ -25,6 +25,7 @@ public class MapTest {
         assertEquals(map.getTiles().containsKey(new Location(-1,1,-1)), true);
         assertEquals(map.getTiles().containsKey(new Location(1,1,1)), true);
         assertEquals(map.getTiles().size(),5);
+        map.printTiles();
     }
 
     @Test

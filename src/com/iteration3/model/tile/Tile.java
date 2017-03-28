@@ -8,8 +8,8 @@ public class Tile {
         this.terrain = t;
     }
 
-    public Terrain getTerrain() {
-        return terrain;
+    public String getTerrain(TerrainTypeVisitor v) {
+        return terrain.getTerrainType(v);
     }
 
     public void setTerrain(Terrain terrain) {

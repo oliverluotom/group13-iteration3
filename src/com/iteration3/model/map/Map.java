@@ -65,7 +65,7 @@ public class Map {
     }
 
     private boolean isSeaTile(Location l) {
-        if(tiles.get(l).getTerrain().getTerrainType(new TerrainTypeVisitor()) == "sea") {
+        if(tiles.get(l).getTerrain(new TerrainTypeVisitor()) == "sea") {
             return true;
         }
         return false;
@@ -236,7 +236,7 @@ public class Map {
     public void printTiles() {
         for(Location location : tiles.keySet()) {
             System.out.println(tiles.get(location) + " " + Integer.toString(location.getX()) + " " +  Integer.toString(location.getY()) + " " + Integer.toString(location.getZ()));
-            System.out.println("Terrain: " + tiles.get(location).getTerrain());
+            System.out.println("Terrain: " + tiles.get(location).getTerrain(new TerrainTypeVisitor()));
         }
     }
 

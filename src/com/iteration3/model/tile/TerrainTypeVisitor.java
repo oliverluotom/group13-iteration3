@@ -1,6 +1,6 @@
 package com.iteration3.model.tile;
 
-public class TerrainTypeVisitor implements TerrainVisitor {
+public class TerrainTypeVisitor implements iTerrainVisitor {
 
     @Override
     public String getType(DesertTerrain terrain) {
