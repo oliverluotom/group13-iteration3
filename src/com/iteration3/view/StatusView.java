@@ -1,6 +1,9 @@
 package com.iteration3.view;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -9,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -25,9 +30,9 @@ public class StatusView extends VBox {
 		this.setWidth(width);
 		this.setHeight(height);
 		
-		terrainType = new Label();
-		riverType = new Label();
-		rotateOption = new Label();
+		terrainType = new Label("");
+		riverType = new Label("");
+		rotateOption = new Label("");
 		
 		submitButton = new Button("Create Tile");
 		removeButton = new Button("Remove Tile");
@@ -57,56 +62,102 @@ public class StatusView extends VBox {
 	
 	private void initializeView() {
 		
-		this.setAlignment(Pos.CENTER);
-		this.getChildren().addAll(selectTerrain,terrainType,selectRiver, riverType,rotateOption);
+		Label title = new Label("Map Building Menu");
+		title.setFont(Font.font("Verdana", FontWeight.BOLD,30));
+		
+		this.setAlignment(Pos.TOP_CENTER);
+		
+		this.getChildren().add(title);
+		
+		VBox.setMargin(selectTerrain, new Insets(50,0,0,0));
+		this.getChildren().add(selectTerrain);
+		
+		this.getChildren().add(terrainType);
+		
+		VBox.setMargin(selectRiver, new Insets(30,0,0,0));
+		this.getChildren().add(selectRiver);
+		
+		
+		this.getChildren().add(riverType);
+		
+		VBox.setMargin(rotateOption, new Insets(15,0,0,0));
+		this.getChildren().add(rotateOption);
 		
 		HBox horizontalPane = new HBox(10);
 		horizontalPane.setAlignment(Pos.CENTER);
 		
 		horizontalPane.getChildren().addAll(submitButton,removeButton);
 		
+		VBox.setMargin(horizontalPane, new Insets(15,0,0,0));
 		this.getChildren().add(horizontalPane);
-	}
-	
-	protected void add(Node node) {
-		this.getChildren().add(node);
+		
+		selectTerrain.setFont(Font.font("Verdana", FontWeight.SEMI_BOLD, 15));
+		selectRiver.setFont(Font.font("Verdana",FontWeight.SEMI_BOLD,15));
+		
+		terrainType.setFont(Font.font(15));
+		riverType.setFont(Font.font(15));
+		rotateOption.setFont(Font.font(15));
+		
+		terrainType.setTextFill(Color.DARKGRAY);
+		riverType.setTextFill(Color.DARKGRAY);
+		rotateOption.setTextFill(Color.DARKGREY);
 	}
 	
 	public void highlightTerrainOption() {
 		selectTerrain.setFill(Color.BLUE);
 		selectRiver.setFill(Color.BLACK);
-		rotateOption.setTextFill(Color.BLACK);
 		
+		terrainType.setTextFill(Color.BLACK);
+		rotateOption.setTextFill(Color.DARKGREY);
+		riverType.setTextFill(Color.DARKGRAY);
 	}
 	
 	public void highlightRiverOption() {
 		selectRiver.setFill(Color.BLUE);
 		selectTerrain.setFill(Color.BLACK);
 		rotateOption.setTextFill(Color.BLACK);
+		
+		riverType.setTextFill(Color.BLACK);
+		rotateOption.setTextFill(Color.DARKGREY);
+		terrainType.setTextFill(Color.DARKGRAY);
 	}
 	
 	public void highlightRotateOption() {
 		rotateOption.setTextFill(Color.BLUE);
 		selectTerrain.setFill(Color.BLACK);
 		selectRiver.setFill(Color.BLACK);
+		
+		terrainType.setTextFill(Color.DARKGRAY);
+		riverType.setTextFill(Color.DARKGRAY);
 	}
 	
 	public void invalidateTerrainOption() {
 		selectTerrain.setFill(Color.RED);
 		selectRiver.setFill(Color.BLACK);
 		rotateOption.setTextFill(Color.BLACK);
+		
+		terrainType.setTextFill(Color.DARKGREY);
+		rotateOption.setTextFill(Color.DARKGREY);
+		riverType.setTextFill(Color.DARKGRAY);
 	}
 	
 	public void invalidateRiverOption() {
 		selectRiver.setFill(Color.RED);
 		selectTerrain.setFill(Color.BLACK);
 		rotateOption.setTextFill(Color.BLACK);
+		
+		terrainType.setTextFill(Color.DARKGREY);
+		rotateOption.setTextFill(Color.DARKGREY);
+		riverType.setTextFill(Color.DARKGRAY);
 	}
 	
 	public void invalidateRotateOption() {
 		rotateOption.setTextFill(Color.RED);
 		selectTerrain.setFill(Color.BLACK);
 		selectRiver.setFill(Color.BLACK);
+		
+		terrainType.setTextFill(Color.DARKGREY);
+		riverType.setTextFill(Color.DARKGRAY);
 	}
 	
 	public void setTerrainType(String terrain) {
@@ -119,6 +170,14 @@ public class StatusView extends VBox {
 	
 	public void setRotateOption(String rotation) {
 		rotateOption.setText(rotation);
+	}
+	
+	public void setOnClickSubmit(EventHandler<ActionEvent> handler) {
+		submitButton.setOnAction(handler);
+	}
+	
+	public void setOnClickRemove(EventHandler<ActionEvent> handler) {
+		removeButton.setOnAction(handler);
 	}
 }
 

@@ -23,6 +23,7 @@ public class StatusViewTest extends Application {
 		
 		view.highlightTerrainOption();
 		
+		
 	}
 
 	public static void main(String[] args) {
