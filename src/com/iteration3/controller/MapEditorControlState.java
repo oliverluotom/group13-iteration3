@@ -6,12 +6,14 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
 
-import static java.awt.event.KeyEvent.*;
+
+import javafx.scene.input.KeyCode;
+
 
 public class MapEditorControlState implements ControlDispatchState{
     private CursorController cursorController;
     private StatusController statusController;
-    private HashMap<Integer,Action> keyMap;
+    private HashMap<KeyCode,Action> keyMap;
     Map map;
 
     public MapEditorControlState(Map map){
@@ -22,10 +24,7 @@ public class MapEditorControlState implements ControlDispatchState{
     }
 
     public void initHashMap(){
-        keyMap.put(VK_UP, new UpModeAction(statusController, map));
-        keyMap.put(VK_DOWN, new DownModeAction(statusController, map));
-        keyMap.put(VK_RIGHT, new RightElementAction(statusController, map));
-        keyMap.put(VK_LEFT, new LeftElementAction(statusController, map));
+        
     }
 
     public void handleInput(KeyEvent e){
