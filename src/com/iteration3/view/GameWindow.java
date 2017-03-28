@@ -1,10 +1,13 @@
 package com.iteration3.view;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class GameWindow extends BorderPane {
     private MenuBar menuBar;
@@ -37,4 +40,44 @@ public class GameWindow extends BorderPane {
         this.setCenter(mapView);
         this.setBottom(statusView);
     }
+    
+    public void highlightRiverOption() {
+		statusView.highlightRiverOption();
+	}
+	
+	public void highlightRotateOption() {
+		statusView.highlightRotateOption();
+	}
+	
+	public void invalidateTerrainOption() {
+		statusView.invalidateTerrainOption();
+	}
+	
+	public void invalidateRiverOption() {
+		statusView.invalidateRiverOption();
+	}
+	
+	public void invalidateRotateOption() {
+		statusView.invalidateRotateOption();
+	}
+	
+	public void setTerrainType(String terrain) {
+		statusView.setTerrainType(terrain);
+	}
+	
+	public void setRiverType(String river) {
+		statusView.setRiverType(river);
+	}
+	
+	public void setRotateOption(String rotation) {
+		statusView.setRotateOption(rotation);
+	}
+	
+	public void setOnClickSubmit(EventHandler<ActionEvent> handler) {
+		statusView.setOnClickSubmit(handler);
+	}
+	
+	public void setOnClickRemove(EventHandler<ActionEvent> handler) {
+		statusView.setOnClickRemove(handler);
+	}
 }

@@ -18,7 +18,7 @@ public class MapEditorControlState implements ControlDispatchState{
         this.map = map;
         keyMap = new HashMap<>();
         cursorController = new CursorController();
-        statusController = new StatusController(map);
+        statusController = new StatusController(map,keyMap);
     }
 
     public void initHashMap(){
