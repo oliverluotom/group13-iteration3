@@ -49,6 +49,18 @@ public class MapTest {
 
     @Test
     public void testRiverValidation(){
+        Map map = new Map();
+        map.addTileFromFile(new Location(0,0,0), new Tile(new SeaTerrain()));
+        assertEquals(map.validateRiverLocation(new Location(0,1,-1), new River(1)),true);
+        map.addRiverFromFile(new Location(0,1,-1), new River(1));
+        map.addTileFromFile(new Location(0,1,-1), new Tile(new WoodsTerrain()));
+        assertEquals(map.validateRiverLocation(new Location(1,0,-1), new River(6)), false);
+        map.addTileFromFile(new Location(1,0,-1), new Tile(new WoodsTerrain()));
+        assertEquals(map.validateRiverLocation(new Location(1,-1,0), new River(1)), false);
+        assertEquals(map.validateRiverLocation(new Location(1,-1,0), new River(6)), true);
+        map.addTileFromFile(new Location(1,-1,0), new Tile(new PastureTerrain()));
+        map.addRiverFromFile(new Location(1,-1,0), new River(6));
+        assertEquals(map.validateRiverLocation(new Location(1,10,0), new River(1)), false);
 
     }
 

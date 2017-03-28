@@ -21,26 +21,26 @@ public class Map {
     }
 
     public void addTileFromFile(Location l, Tile t) {
-        if(validateLocation(l)) {
+        if(validateLocationRange(l)) {
             tiles.put(l,t);
         }
     }
 
     public void addRiverFromFile(Location l, River r) {
-        if(validateLocation(l) && !isSeaTile(l)) {
+        if(validateLocationRange(l)) {
             rivers.put(l, r);
         }
     }
 
-    public void addTileromGUI(Location l, Tile t) {
-        if(validateLocation(l) && validateLocation(l)) {
+    public void addTileFromGUI(Location l, Tile t) {
+        if(validateLocationRange(l) && validateTileAdjacency(l)) {
             tiles.put(l,t);
         }
     }
 
     public void addRiverFromGUI(Location l, River r) {
-        if(validateLocation(l) && validateRiverLocation(l, r) && !isSeaTile(l)) {
-            rivers.put(l, r);
+        if(validateLocationRange(l) && validateRiverLocation(l, r)) {
+                rivers.put(l, r);
         }
     }
 
@@ -55,7 +55,7 @@ public class Map {
     }
 
 
-    public boolean validateLocation(Location location) {
+    public boolean validateLocationRange(Location location) {
         if(location.getX() > Math.abs(10) || location.getY() > Math.abs(10) || location.getZ() > Math.abs(10)) {
             System.out.println("Invalid location type");
             return false;
@@ -65,7 +65,7 @@ public class Map {
     }
 
     private boolean isSeaTile(Location l) {
-        if(tiles.get(l).getTerrain(new TerrainTypeVisitor()) == "sea") {
+        if(tiles.get(l).getTerrain(new TerrainTypeVisitor()).equals("sea")) {
             return true;
         }
         return false;
@@ -73,10 +73,6 @@ public class Map {
 
     //TODO: FIX LOD VIOLATION
     public boolean validateRiverLocation(Location l, River r){
-        if(rivers.size() == 0) {
-            return true;
-        }
-
         //Surrounding Check Center
         if (rivers.containsKey(l.getNorth())) {
             if(rivers.get(l.getNorth()).containsEdge(4)){
@@ -132,8 +128,10 @@ public class Map {
                         return false;
                     }
                 }
-                else if(tiles.containsKey(l.getNorth()) && !isSeaTile(l.getNorth())){
-                    return false;
+                else if(tiles.containsKey(l.getNorth())){
+                    if(!isSeaTile(l.getNorth())){
+                        return false;
+                    }
                 }
             }
             else if(holder == 2){
@@ -142,8 +140,10 @@ public class Map {
                         return false;
                     }
                 }
-                else if(tiles.containsKey(l.getNorthEast()) && !isSeaTile(l.getNorthEast())){
-                    return false;
+                else if(tiles.containsKey(l.getNorthEast())){
+                    if(!isSeaTile(l.getNorthEast())) {
+                        return false;
+                    }
                 }
             }
             else if(holder == 3){
@@ -152,8 +152,10 @@ public class Map {
                         return false;
                     }
                 }
-                else if(tiles.containsKey(l.getSouthEast()) && !isSeaTile(l.getSouthEast())){
-                    return false;
+                else if(tiles.containsKey(l.getSouthEast())){
+                    if(!isSeaTile(l.getSouthEast())) {
+                        return false;
+                    }
                 }
             }
             else if(holder == 4){
@@ -162,8 +164,10 @@ public class Map {
                         return false;
                     }
                 }
-                else if(tiles.containsKey(l.getSouth()) && !isSeaTile(l.getSouth())){
-                    return false;
+                else if(tiles.containsKey(l.getSouth())){
+                    if(!isSeaTile(l.getSouth())) {
+                        return false;
+                    }
                 }
             }
             else if(holder == 5){
@@ -172,8 +176,10 @@ public class Map {
                         return false;
                     }
                 }
-                else if(tiles.containsKey(l.getSouthWest()) && !isSeaTile(l.getSouthWest())){
-                    return false;
+                else if(tiles.containsKey(l.getSouthWest())){
+                    if(!isSeaTile(l.getSouthWest())) {
+                        return false;
+                    }
                 }
             }
             else if(holder == 6){
@@ -182,12 +188,21 @@ public class Map {
                         return false;
                     }
                 }
-                else if(tiles.containsKey(l.getNorthWest()) && !isSeaTile(l.getNorthWest())){
-                    return false;
+                else if(tiles.containsKey(l.getNorthWest())){
+                    if(!isSeaTile(l.getNorthWest())) {
+                        return false;
+                    }
                 }
             }
         }
-
+        if(!validateTileAdjacency(l) && !tiles.isEmpty()){
+            if(tiles.size()==1){
+                if(tiles.containsKey(l)){
+                    return true;
+                }
+            }
+            return false;
+        }
         return true;
     }
 
