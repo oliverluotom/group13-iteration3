@@ -9,10 +9,9 @@ import java.util.HashMap;
 import static java.awt.event.KeyEvent.*;
 
 public class MapEditorControlState implements ControlDispatchState{
-    //TODO: cursorController - may need another keymap
     private CursorController cursorController;
     private StatusController statusController;
-    private HashMap<Integer,StatusAction> keyMap;
+    private HashMap<Integer,Action> keyMap;
     Map map;
 
     public MapEditorControlState(Map map){
@@ -31,7 +30,7 @@ public class MapEditorControlState implements ControlDispatchState{
 
     public void handleInput(KeyEvent e){
         if (keyMap.containsKey(e.getKeyCode()))
-            keyMap.get(e.getKeyCode()).execute(statusController, map);
+            keyMap.get(e.getKeyCode()).execute();
     }
 
 
