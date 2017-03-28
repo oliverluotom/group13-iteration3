@@ -6,3 +6,4 @@ out/*
 group13-iteration3.iml
 *.iml
 .gitignore
+/bin/
