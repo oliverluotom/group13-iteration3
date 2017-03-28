@@ -1,10 +1,7 @@
 import com.iteration3.model.map.Location;
 import com.iteration3.model.map.Map;
 import com.iteration3.model.map.MapFileManager;
-import com.iteration3.model.tile.PastureTerrain;
-import com.iteration3.model.tile.River;
-import com.iteration3.model.tile.Tile;
-import com.iteration3.model.tile.WoodsTerrain;
+import com.iteration3.model.tile.*;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -14,7 +11,46 @@ import static org.junit.Assert.assertEquals;
  */
 public class MapTest {
 
-    // TODO: Get relative path, was not working for me
+    @Test
+    public void testContains(){
+        Map map = new Map();
+        map.getTiles().put(new Location(0,0,0), new Tile(new SeaTerrain()));
+        map.getTiles().put(new Location(1,-1,1), new Tile(new SeaTerrain()));
+        map.getTiles().put(new Location(-1,1,1), new Tile(new SeaTerrain()));
+        map.getTiles().put(new Location(-1,1,-1), new Tile(new SeaTerrain()));
+        map.getTiles().put(new Location(1,1,1), new Tile(new SeaTerrain()));
+        assertEquals(map.getTiles().containsKey(new Location(0,0,0)), true);
+        assertEquals(map.getTiles().containsKey(new Location(1,-1,1)), true);
+        assertEquals(map.getTiles().containsKey(new Location(-1,1,1)), true);
+        assertEquals(map.getTiles().containsKey(new Location(-1,1,-1)), true);
+        assertEquals(map.getTiles().containsKey(new Location(1,1,1)), true);
+        assertEquals(map.getTiles().size(),5);
+    }
+
+    @Test
+    public void testAdjacencyValidation(){
+        Map map = new Map();
+        assertEquals(map.validateTileAdjacency(new Location(0,0,0)), true);
+        map.addTileFromFile(new Location(0,0,0), new Tile(new PastureTerrain()));
+        assertEquals(map.validateTileAdjacency(new Location(0,1,-1)),true);
+        assertEquals(map.validateTileAdjacency(new Location(-1,1,0)),true);
+        assertEquals(map.validateTileAdjacency(new Location(-1,0,1)),true);
+        assertEquals(map.validateTileAdjacency(new Location(0,-1,1)),true);
+        assertEquals(map.validateTileAdjacency(new Location(1,-1,0)),true);
+        assertEquals(map.validateTileAdjacency(new Location(1,0,-1)),true);
+        assertEquals(map.validateTileAdjacency(new Location(2,1,-1)),false);
+        assertEquals(map.validateTileAdjacency(new Location(-1,2,5)),false);
+        assertEquals(map.validateTileAdjacency(new Location(-1,13,2)),false);
+        assertEquals(map.validateTileAdjacency(new Location(10,-1,7)),false);
+        assertEquals(map.validateTileAdjacency(new Location(12,-8,10)),false);
+        assertEquals(map.validateTileAdjacency(new Location(10,5,-6)),false);
+    }
+
+    @Test
+    public void testRiverValidation(){
+
+    }
+
     @Test
     public void testFileToMap() throws Exception{
         Map map = new Map();
@@ -35,12 +71,12 @@ public class MapTest {
         Map map = new Map();
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/model/map/mapFileWrite.txt");
 
-        map.addTileToMapFromFile(new Location(0,0,0), new Tile(new PastureTerrain()));
-        map.addTileToMapFromFile(new Location(0,0,1), new Tile(new WoodsTerrain()));
-        map.addTileToMapFromFile(new Location(0,1,-1), new Tile(new WoodsTerrain()));
+        map.addTileFromFile(new Location(0,0,0), new Tile(new PastureTerrain()));
+        map.addTileFromFile(new Location(0,0,1), new Tile(new WoodsTerrain()));
+        map.addTileFromFile(new Location(0,1,-1), new Tile(new WoodsTerrain()));
 
-        map.addRiverToMapFromFile(new Location(0,0,0), new River(1));
-        map.addRiverToMapFromFile(new Location(0,1,-1), new River(4, 1));
+        map.addRiverFromFile(new Location(0,0,0), new River(1));
+        map.addRiverFromFile(new Location(0,1,-1), new River(4, 1));
 
         mapManager.fillTextFileFromMap();
 

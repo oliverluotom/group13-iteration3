@@ -95,6 +95,15 @@ public class River {
         }
     }
 
+    public boolean containsEdge(int i){
+        if(riverEdges.contains(i)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public void printRiverEdges() {
         System.out.println("Edges: " + riverEdges);
     }

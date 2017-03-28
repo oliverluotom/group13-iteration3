@@ -63,7 +63,7 @@ public class MapFileManager {
                 }
 
                 Tile tile = new Tile(terrain);
-                map.addTileToMapFromFile(location, tile);
+                map.addTileFromFile(location, tile);
 
                 // handle rivers if they exist
                 if(splitLine.length > 6) {
@@ -71,7 +71,7 @@ public class MapFileManager {
                     for(int i = 6; i < splitLine.length; i++) {
                         river.addRiverEdge(Integer.parseInt(splitLine[i]));
                     }
-                    map.addRiverToMapFromFile(location,river);
+                    map.addRiverFromFile(location,river);
                 }
 
 
