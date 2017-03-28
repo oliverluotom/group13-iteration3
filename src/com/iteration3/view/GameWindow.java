@@ -80,4 +80,11 @@ public class GameWindow extends BorderPane {
 	public void setOnClickRemove(EventHandler<ActionEvent> handler) {
 		statusView.setOnClickRemove(handler);
 	}
+
+	public void moveCursorNW(){}
+	public void moveCursorNE(){}
+	public void moveCursorSW(){}
+	public void moveCursorSE(){}
+	public void moveCursorNorth(){}
+	public void moveCursorSouth(){}
 }
