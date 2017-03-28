@@ -1,6 +1,7 @@
 package com.iteration3.controller;
 
-import java.awt.event.KeyEvent;
+
+import javafx.scene.input.KeyEvent;
 
 /*--------------------------------------------------------------------------------------
 |    ${NAME} Module: Created by ${USER} on ${DATE}.
@@ -10,5 +11,5 @@ import java.awt.event.KeyEvent;
 ---------------------------------------------------------------------------------------*/
 public interface ControlDispatchState {
 
-    public void handleInput(KeyEvent e);
+    public void handleInput(KeyEvent event);
 }

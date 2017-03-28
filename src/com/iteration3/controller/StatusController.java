@@ -1,7 +1,6 @@
 package com.iteration3.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import com.iteration3.model.GameModel;
@@ -10,13 +9,15 @@ import com.iteration3.model.map.Map;
 import com.iteration3.model.tile.*;
 
 import com.iteration3.view.GameWindow;
+import javafx.scene.input.KeyCode;
 
-public class StatusController implements Controller{
+public class StatusController {
     
 	Map map;
 	GameModel model; 
 	GameWindow window; 
-    HashMap<Integer,Action> keyMap;
+    HashMap<KeyCode
+            ,Action> keyMap;
     HashMap<String, Terrain> terrainMap;
     HashMap<String,Integer[]> riverMap;
     ArrayList<ArrayList<String>> userOptions; 
@@ -25,7 +26,7 @@ public class StatusController implements Controller{
     int selectedRiver;
     int mode;
 
-    public StatusController(Map map, HashMap<Integer,Action> keyMap){
+    public StatusController(Map map, HashMap<KeyCode,Action> keyMap){
         this.map = map;
         this.keyMap = keyMap;
         mode = 0;
