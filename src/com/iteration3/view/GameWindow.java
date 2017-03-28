@@ -3,9 +3,10 @@ package com.iteration3.view;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-public class GameWindow extends VBox {
+public class GameWindow extends BorderPane {
     private MenuBar menuBar;
     private MapView mapView;
     private StatusView statusView;
@@ -33,6 +34,7 @@ public class GameWindow extends VBox {
         this.menuBar.getMenus().add(fileMenu);
 
         //TODO: Add Status View to the addAll() call below
-        this.getChildren().addAll(menuBar, mapView, statusView);
+        this.setCenter(mapView);
+        this.setBottom(statusView);
     }
 }
