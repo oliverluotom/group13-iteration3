@@ -33,7 +33,7 @@ public class Map {
     }
 
     public void addTileFromGUI(Location l, Tile t) {
-        if(validateLocationRange(l) && validateTileAdjacency(l)) {
+        if(validateLocationRange(l) && validateTileAdjacency(l) && validateTileLocation(l,t)) {
             tiles.put(l,t);
         }
     }
@@ -71,7 +71,47 @@ public class Map {
         return false;
     }
 
-    //TODO: FIX LOD VIOLATION
+    public boolean validateTileLocation(Location l , Tile t){
+        if(!t.getTerrain(new TerrainTypeVisitor()).equals("sea")) {
+            if (rivers.containsKey(l)) {
+                return true;
+            }
+            else{
+                if (rivers.containsKey(l.getNorth())) {
+                    if(rivers.get(l.getNorth()).containsEdge(4)){
+                        return false;
+                    }
+                }
+                if (rivers.containsKey(l.getNorthEast())) {
+                    if(rivers.get(l.getNorthEast()).containsEdge(5)){
+                        return false;
+                    }
+                }
+                if (rivers.containsKey(l.getNorthWest())) {
+                    if(rivers.get(l.getNorthWest()).containsEdge(3)){
+                        return false;
+                    }
+                }
+                if (rivers.containsKey(l.getSouth())) {
+                    if(rivers.get(l.getSouth()).containsEdge(1)){
+                        return false;
+                    }
+                }
+                if (rivers.containsKey(l.getSouthEast())) {
+                    if(rivers.get(l.getSouthEast()).containsEdge(6)){
+                        return false;
+                    }
+                }
+                if (rivers.containsKey(l.getSouthWest())) {
+                    if(rivers.get(l.getSouthWest()).containsEdge(2)){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     public boolean validateRiverLocation(Location l, River r){
         //Surrounding Check Center
         if (rivers.containsKey(l.getNorth())) {

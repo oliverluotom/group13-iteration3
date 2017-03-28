@@ -61,7 +61,14 @@ public class MapTest {
         map.addTileFromFile(new Location(1,-1,0), new Tile(new PastureTerrain()));
         map.addRiverFromFile(new Location(1,-1,0), new River(6));
         assertEquals(map.validateRiverLocation(new Location(1,10,0), new River(1)), false);
-
+        assertEquals(map.validateTileLocation(new Location(0,2,-2),new Tile(new WoodsTerrain())),false);
+        map.addTileFromGUI(new Location(0,2,-2),new Tile(new WoodsTerrain()));
+        assertEquals(map.getTiles().containsKey(new Location(0,2,-2)), false);
+        assertEquals(map.validateRiverLocation(new Location(0,2,-2),new River(4)),true);
+        map.addRiverFromGUI(new Location(0,2,-2),new River(4));
+        assertEquals(map.validateTileLocation(new Location(0,2,-2),new Tile(new WoodsTerrain())),true);
+        map.addTileFromGUI(new Location(0,2,-2),new Tile(new WoodsTerrain()));
+        assertEquals(map.getTiles().containsKey(new Location(0,2,-2)), true);
     }
 
     @Test
