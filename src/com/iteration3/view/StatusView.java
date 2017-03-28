@@ -1,12 +1,10 @@
 package com.iteration3.view;
 
-import javafx.application.Application;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -15,7 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+
 
 public class StatusView extends VBox {
 	
@@ -69,18 +67,18 @@ public class StatusView extends VBox {
 		
 		this.getChildren().add(title);
 		
-		VBox.setMargin(selectTerrain, new Insets(50,0,0,0));
+		
 		this.getChildren().add(selectTerrain);
 		
 		this.getChildren().add(terrainType);
 		
-		VBox.setMargin(selectRiver, new Insets(30,0,0,0));
+		
 		this.getChildren().add(selectRiver);
 		
 		
 		this.getChildren().add(riverType);
 		
-		VBox.setMargin(rotateOption, new Insets(15,0,0,0));
+		
 		this.getChildren().add(rotateOption);
 		
 		HBox horizontalPane = new HBox(10);
@@ -88,7 +86,7 @@ public class StatusView extends VBox {
 		
 		horizontalPane.getChildren().addAll(submitButton,removeButton);
 		
-		VBox.setMargin(horizontalPane, new Insets(15,0,0,0));
+		
 		this.getChildren().add(horizontalPane);
 		
 		selectTerrain.setFont(Font.font("Verdana", FontWeight.SEMI_BOLD, 15));
@@ -174,6 +172,7 @@ public class StatusView extends VBox {
 	
 	public void setOnClickSubmit(EventHandler<ActionEvent> handler) {
 		submitButton.setOnAction(handler);
+		
 	}
 	
 	public void setOnClickRemove(EventHandler<ActionEvent> handler) {
