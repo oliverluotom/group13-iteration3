@@ -15,30 +15,30 @@ public class Map {
     // TODO: Add observers
 
     public Map() {
-        tiles = new HashMap<Location, Tile>();
-        rivers = new HashMap<Location, River>();
+        tiles = new HashMap<>();
+        rivers = new HashMap<>();
         // TODO: Initialize observers
     }
 
-    public void addTileToMapFromFile(Location l, Tile t) {
+    public void addTileFromFile(Location l, Tile t) {
         if(validateLocation(l)) {
             tiles.put(l,t);
         }
     }
 
-    public void addRiverToMapFromFile(Location l, River r) {
+    public void addRiverFromFile(Location l, River r) {
         if(validateLocation(l) && !isSeaTile(l)) {
             rivers.put(l, r);
         }
     }
 
-    public void addTileToMapFromGUI(Location l, Tile t) {
+    public void addTileromGUI(Location l, Tile t) {
         if(validateLocation(l) && validateLocation(l)) {
             tiles.put(l,t);
         }
     }
 
-    public void addRiverToMapFromGUI(Location l, River r) {
+    public void addRiverFromGUI(Location l, River r) {
         if(validateLocation(l) && validateRiverLocation(l, r) && !isSeaTile(l)) {
             rivers.put(l, r);
         }
@@ -79,43 +79,43 @@ public class Map {
 
         //Surrounding Check Center
         if (rivers.containsKey(l.getNorth())) {
-            if(rivers.get(l.getNorth()).getRiverEdges().contains(4)){
-                if(!r.getRiverEdges().contains(1)){
+            if(rivers.get(l.getNorth()).containsEdge(4)){
+                if(!r.containsEdge(1)){
                     return false;
                 }
             }
         }
         if (rivers.containsKey(l.getNorthEast())) {
-            if(rivers.get(l.getNorthEast()).getRiverEdges().contains(5)){
-                if(!r.getRiverEdges().contains(2)){
+            if(rivers.get(l.getNorthEast()).containsEdge(5)){
+                if(!r.containsEdge(2)){
                     return false;
                 }
             }
         }
         if (rivers.containsKey(l.getNorthWest())) {
-            if(rivers.get(l.getNorthWest()).getRiverEdges().contains(3)){
-                if(!r.getRiverEdges().contains(6)){
+            if(rivers.get(l.getNorthWest()).containsEdge(3)){
+                if(!r.containsEdge(6)){
                     return false;
                 }
             }
         }
         if (rivers.containsKey(l.getSouth())) {
-            if(rivers.get(l.getSouth()).getRiverEdges().contains(1)){
-                if(!r.getRiverEdges().contains(4)){
+            if(rivers.get(l.getSouth()).containsEdge(1)){
+                if(!r.containsEdge(4)){
                     return false;
                 }
             }
         }
         if (rivers.containsKey(l.getSouthEast())) {
-            if(rivers.get(l.getSouthEast()).getRiverEdges().contains(6)){
-                if(!r.getRiverEdges().contains(3)){
+            if(rivers.get(l.getSouthEast()).containsEdge(6)){
+                if(!r.containsEdge(3)){
                     return false;
                 }
             }
         }
         if (rivers.containsKey(l.getSouthWest())) {
-            if(rivers.get(l.getSouthWest()).getRiverEdges().contains(2)){
-                if(!r.getRiverEdges().contains(5)){
+            if(rivers.get(l.getSouthWest()).containsEdge(2)){
+                if(!r.containsEdge(5)){
                     return false;
                 }
             }
@@ -128,7 +128,7 @@ public class Map {
             int holder = iterator.next();
             if(holder == 1){
                 if(rivers.containsKey(l.getNorth())){
-                    if(!rivers.get(l.getNorth()).getRiverEdges().contains(4)){
+                    if(!rivers.get(l.getNorth()).containsEdge(4)){
                         return false;
                     }
                 }
@@ -138,7 +138,7 @@ public class Map {
             }
             else if(holder == 2){
                 if(rivers.containsKey(l.getNorthEast())){
-                    if(!rivers.get(l.getNorthEast()).getRiverEdges().contains(5)){
+                    if(!rivers.get(l.getNorthEast()).containsEdge(5)){
                         return false;
                     }
                 }
@@ -148,7 +148,7 @@ public class Map {
             }
             else if(holder == 3){
                 if(rivers.containsKey(l.getSouthEast())){
-                    if(!rivers.get(l.getSouthEast()).getRiverEdges().contains(6)){
+                    if(!rivers.get(l.getSouthEast()).containsEdge(6)){
                         return false;
                     }
                 }
@@ -158,7 +158,7 @@ public class Map {
             }
             else if(holder == 4){
                 if(rivers.containsKey(l.getSouth())){
-                    if(!rivers.get(l.getSouth()).getRiverEdges().contains(1)){
+                    if(!rivers.get(l.getSouth()).containsEdge(1)){
                         return false;
                     }
                 }
@@ -168,7 +168,7 @@ public class Map {
             }
             else if(holder == 5){
                 if(rivers.containsKey(l.getSouthWest())){
-                    if(!rivers.get(l.getSouthWest()).getRiverEdges().contains(2)){
+                    if(!rivers.get(l.getSouthWest()).containsEdge(2)){
                         return false;
                     }
                 }
@@ -178,7 +178,7 @@ public class Map {
             }
             else if(holder == 6){
                 if(rivers.containsKey(l.getNorthWest())){
-                    if(!rivers.get(l.getNorthWest()).getRiverEdges().contains(3)){
+                    if(!rivers.get(l.getNorthWest()).containsEdge(3)){
                         return false;
                     }
                 }
