@@ -14,7 +14,7 @@ public class ModelViewAdapter {
 
     public void update(){
         Map map = gameModel.getMap();
-
+        //TODO: Get Terrains
     }
 
 }
