@@ -1,6 +1,8 @@
 package com.iteration3.view;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -168,6 +170,14 @@ public class StatusView extends VBox {
 	
 	public void setRotateOption(String rotation) {
 		rotateOption.setText(rotation);
+	}
+	
+	public void setOnClickSubmit(EventHandler<ActionEvent> handler) {
+		submitButton.setOnAction(handler);
+	}
+	
+	public void setOnClickRemove(EventHandler<ActionEvent> handler) {
+		removeButton.setOnAction(handler);
 	}
 }
 
