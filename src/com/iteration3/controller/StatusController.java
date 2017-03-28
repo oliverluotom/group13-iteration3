@@ -2,22 +2,18 @@ package com.iteration3.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import javafx.scene.input.KeyCode;
 import com.iteration3.model.GameModel;
 import com.iteration3.model.map.Map;
-
 import com.iteration3.model.tile.*;
-
 import com.iteration3.view.GameWindow;
-import javafx.scene.input.KeyCode;
 
 public class StatusController {
     
 	Map map;
 	GameModel model; 
-	GameWindow window; 
-    HashMap<KeyCode
-            ,Action> keyMap;
+	GameWindow window;
+    HashMap<KeyCode,Action> keyMap;
     HashMap<String, Terrain> terrainMap;
     HashMap<String,Integer[]> riverMap;
     ArrayList<ArrayList<String>> userOptions; 

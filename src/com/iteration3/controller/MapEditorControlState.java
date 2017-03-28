@@ -21,11 +21,8 @@ public class MapEditorControlState implements ControlDispatchState{
         statusController = new StatusController(map,keyMap);
     }
 
-    public void handleInput(KeyEvent event){
+    public void handleInput(KeyEvent event) {
         if (keyMap.containsKey(event.getCode()))
             keyMap.get(event.getCode()).execute();
     }
-
-
-
 }
