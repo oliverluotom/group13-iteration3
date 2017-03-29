@@ -62,5 +62,12 @@ public class Location {
         return new Location(this.x-1, this.y, this.z+1);
     }
 
+    public boolean outOfBounds(int size){
+        if(x+z<=size && x+z>=-size){
+            return true;
+        }
+        return false;
+    }
+
 }
 

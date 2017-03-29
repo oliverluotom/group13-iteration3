@@ -102,23 +102,36 @@ public class MapView extends Pane{
         return cursorLocation;
     }
 
+    //TODO FIX LOD VIOLATIONS
     public void moveCursorNW(){
-        cursorLocation = cursorLocation.getNorthWest();
+        if(cursorLocation.getNorthWest().outOfBounds(size)) {
+            cursorLocation = cursorLocation.getNorthWest();
+        }
     }
     public void moveCursorNE(){
-        cursorLocation = cursorLocation.getNorthEast();
+        if(cursorLocation.getNorthEast().outOfBounds(size)) {
+            cursorLocation = cursorLocation.getNorthEast();
+        }
     }
     public void moveCursorSW(){
-        cursorLocation = cursorLocation.getSouthWest();
+        if(cursorLocation.getSouthWest().outOfBounds(size)) {
+            cursorLocation = cursorLocation.getSouthWest();
+        }
     }
     public void moveCursorSE(){
-        cursorLocation = cursorLocation.getSouthEast();
+        if(cursorLocation.getSouthEast().outOfBounds(size)) {
+            cursorLocation = cursorLocation.getSouthEast();
+        }
     }
     public void moveCursorNorth(){
-        cursorLocation = cursorLocation.getNorth();
+        if(cursorLocation.getNorth().outOfBounds(size)) {
+            cursorLocation = cursorLocation.getNorth();
+        }
     }
     public void moveCursorSouth(){
-        cursorLocation = cursorLocation.getSouth();
+        if(cursorLocation.getSouth().outOfBounds(size)) {
+            cursorLocation = cursorLocation.getSouth();
+        }
     }
 
     // Camera Navigation Methods
