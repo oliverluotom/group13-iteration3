@@ -279,7 +279,8 @@ public class MapView extends Pane{
     }
 
     public void drawRiver(String imageURL, int x, int y) {
-        gc.drawImage(images.getImage(imageURL), (x + 11) * 52 + getCameraX(), (y + 3) * 60 + (30 * x) + getCameraY());
+        Image image = images.getImage(imageURL);
+        gc.drawImage(image, ((x + getXOffset()) * getXPixelOffset())*getScale() + getCameraX(), ((y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x))*getScale() + getCameraY(), image.getWidth()*getScale(), image.getHeight()*getScale());
     }
 
     public int getMapSizeRadius() {
