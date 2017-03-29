@@ -34,7 +34,8 @@ public class ModelViewAdapter implements Visitor {
 
             for(Location location : map.getTiles().keySet()) {
                 currentLocation = location;
-                map.getTiles().get(location).getTerrain().acceptVisitor(this);
+                Terrain t = map.getTiles().get(location).getTerrain();
+                t.acceptVisitor(this);
             }
 
         } catch (IOException e) {
