@@ -28,6 +28,7 @@ public class GameEngine extends Application{
                     frameCounter = 0;
                     //TODO ADD CONTROLLER UPDATES AND VIEW RENDER UPDATES
                     MVA.update();
+                    gameWindow.update();
                 }
 
             }
