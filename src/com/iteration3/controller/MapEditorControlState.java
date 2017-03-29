@@ -33,7 +33,7 @@ public class MapEditorControlState implements ControlDispatchState{
 
         cursorController.addObserver(statusController);
 
-        mapFileController = new MapFileController(model, window);
+        //mapFileController = new MapFileController(model, window);
 
         
         

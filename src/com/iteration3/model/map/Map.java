@@ -124,6 +124,8 @@ public class Map {
 
     public boolean validateRiverLocation(Location l, River r){
         //Surrounding Check Center
+        //System.out.println("Test");
+
         if (rivers.containsKey(l.getNorth())) {
             if(rivers.get(l.getNorth()).containsEdge(4)){
                 if(!r.containsEdge(1)){

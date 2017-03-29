@@ -23,12 +23,12 @@ public class ModelViewAdapter implements Visitor {
 
     public void update(){
         Map map = gameModel.getMap();
-        try {
+        /*try {
             MapFileManager fileManager = new MapFileManager(map, "src/com/iteration3/model/map/mapFileReadValid.txt");
             fileManager.fillMapFromTextFile();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
         //map.printRivers();
         drawTiles(map);
