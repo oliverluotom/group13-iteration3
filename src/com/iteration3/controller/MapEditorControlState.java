@@ -1,29 +1,36 @@
 package com.iteration3.controller;
+
 /*--------------------------------------------------------------------------------------
 |    MapEditorControlState: Created by Clay on 3/27/17.
 |---------------------------------------------------------------------------------------
 |   State class dedicated to control mode when building a map
 |   Composed of CursorController and StatusController
 ---------------------------------------------------------------------------------------*/
+
+import com.iteration3.model.GameModel;
 import com.iteration3.model.map.Map;
 import com.iteration3.view.GameWindow;
+
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+
 import java.util.HashMap;
 
 public class MapEditorControlState implements ControlDispatchState{
     private CursorController cursorController;
     private StatusController statusController;
     private HashMap<KeyCode,Action> keyMap;
-    Map map;
+    GameModel model;
     GameWindow window;
 
-    public MapEditorControlState(Map map, GameWindow window){
-        this.map = map;
+    public MapEditorControlState(GameModel model, GameWindow window){
+        this.model = model;
         this.window = window;
         keyMap = new HashMap<>();
-        cursorController = new CursorController(map, window, keyMap);
-        statusController = new StatusController(map,keyMap);
+        //cursorController = new CursorController(map, window, keyMap);
+        statusController = new StatusController(model,window,keyMap);
+        
+        
     }
 
     public void handleInput(KeyEvent event) {

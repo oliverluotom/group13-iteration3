@@ -56,6 +56,14 @@ public class Map {
         return true;
     }
 
+    public void clearTiles() {
+        tiles.clear();
+    }
+
+    public void clearRivers() {
+        rivers.clear();
+    }
+
 
     public boolean validateLocationRange(Location location) {
         if(location.getX() > Math.abs(10) || location.getY() > Math.abs(10) || location.getZ() > Math.abs(10)) {

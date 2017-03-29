@@ -1,3 +1,4 @@
+import com.iteration3.model.GameModel;
 import com.iteration3.view.StatusView;
 
 import javafx.application.Application;

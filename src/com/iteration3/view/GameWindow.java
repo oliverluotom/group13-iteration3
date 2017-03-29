@@ -1,10 +1,12 @@
 package com.iteration3.view;
 
+import com.iteration3.model.map.Location;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -39,6 +41,11 @@ public class GameWindow extends BorderPane {
         //TODO: Add Status View to the addAll() call below
         this.setCenter(mapView);
         this.setBottom(statusView);
+       
+    }
+    
+    public void highlightTerrainOption() {
+    	statusView.highlightTerrainOption();
     }
     
     public void highlightRiverOption() {
@@ -80,11 +87,37 @@ public class GameWindow extends BorderPane {
 	public void setOnClickRemove(EventHandler<ActionEvent> handler) {
 		statusView.setOnClickRemove(handler);
 	}
+	
+	public void addKeyHandler(EventHandler <KeyEvent> handler) {
+		this.setOnKeyPressed(handler);
+	}
 
-	public void moveCursorNW(){}
-	public void moveCursorNE(){}
-	public void moveCursorSW(){}
-	public void moveCursorSE(){}
-	public void moveCursorNorth(){}
-	public void moveCursorSouth(){}
+	public void update(){
+    	mapView.update();
+	}
+
+	public void moveCursorNW(){
+		mapView.moveCursorNW();
+	}
+	public void moveCursorNE(){
+		mapView.moveCursorNE();
+	}
+	public void moveCursorSW(){
+		mapView.moveCursorSW();
+	}
+	public void moveCursorSE(){
+		mapView.moveCursorSE();
+	}
+	public void moveCursorNorth(){
+		mapView.moveCursorNorth();
+	}
+	public void moveCursorSouth(){
+		mapView.moveCursorSouth();
+	}
+
+	public Location getCursorLocation(){
+		return mapView.getCursorLocation();
+	}
+	public void setOnClickImport(EventHandler<ActionEvent> handler){} // TODO
+	public void setOnClickExport(EventHandler<ActionEvent> handler){} // TODO
 }

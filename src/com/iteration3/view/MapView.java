@@ -1,5 +1,6 @@
 package com.iteration3.view;
 
+import com.iteration3.model.map.Location;
 import com.iteration3.utilities.Assets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -22,12 +23,18 @@ public class MapView extends Pane{
     private double cameraX, cameraY;
     private int cameraSpeed;
     private Canvas mapCanvas;
+    private Location cursorLocation;
+    private GraphicsContext gc;
+    private int size;
 
     public MapView(double width, double height) {
+        size=4;
         this.images = new Assets();
-
+        cursorLocation = new Location(0,0,0);
         this.setWidth(width);
         this.setHeight(height);
+        this.mapCanvas = new Canvas(this.getWidth(),this.getHeight());
+        this.gc = getMapCanvas().getGraphicsContext2D();
         initializePane();
     }
 
@@ -36,8 +43,6 @@ public class MapView extends Pane{
     }
 
     private void initializePane() {
-
-        this.mapCanvas = new Canvas(this.getWidth(),this.getHeight());
         this.mapCanvas.addEventFilter(MouseEvent.MOUSE_MOVED,
                 event -> {
                     if (canMoveCameraRight(event.getSceneX())) {
@@ -54,23 +59,66 @@ public class MapView extends Pane{
                     }
                 });
         this.getChildren().add(getMapCanvas());
-        GraphicsContext gc = getMapCanvas().getGraphicsContext2D(); // Clears whatever is currently on the canvas
         gc.setFill(Color.TRANSPARENT);
         gc.fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
         gc.setFill(Color.BLACK);
         gc.fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
         gc.setFill(Color.WHITE);
-        //gc.drawImage(images.getImage("desert"), 200, 200);
-        for(int x = -5; x <= 5; x++){
-            for(int y = -5; y <= 5; y++){
-                if(x%2==0){
-                    gc.drawImage(images.getImage("desert"), (x + 5) * 52, (y + 5) * 60 + 30);
-                }
-                else {
-                    gc.drawImage(images.getImage("desert"), (x + 5) * 52, (y + 5) * 60);
+
+        drawCursor();
+
+        for(int x = -size; x <= size; x++){
+            for(int y = -size; y <= size; y++){
+                if(x+y<=size && x+y>=-size) {
+                    gc.drawImage(images.getImage("empty"), (x + 11) * 52, (y + 3) * 60 + (30 * x));
                 }
             }
         }
+    }
+
+    public void drawCursor(){
+        gc.drawImage(images.getImage("cursor"),(cursorLocation.getX()+11)*52, (cursorLocation.getZ()+3)*60 + (30 * cursorLocation.getX()));
+    }
+
+    public void update(){
+        gc.setFill(Color.TRANSPARENT);
+        gc.fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
+        gc.setFill(Color.WHITE);
+
+        for(int x = -size; x <= size; x++){
+            for(int y = -size; y <= size; y++){
+                if(x+y<=size && x+y>=-size) {
+                    gc.drawImage(images.getImage("empty"), (x + 11) * 52, (y + 3) * 60 + (30 * x));
+                }
+            }
+        }
+
+        drawCursor();
+    }
+
+    public Location getCursorLocation(){
+        return cursorLocation;
+    }
+
+    public void moveCursorNW(){
+        cursorLocation = cursorLocation.getNorthWest();
+    }
+    public void moveCursorNE(){
+        cursorLocation = cursorLocation.getNorthEast();
+    }
+    public void moveCursorSW(){
+        cursorLocation = cursorLocation.getSouthWest();
+    }
+    public void moveCursorSE(){
+        cursorLocation = cursorLocation.getSouthEast();
+    }
+    public void moveCursorNorth(){
+        cursorLocation = cursorLocation.getNorth();
+    }
+    public void moveCursorSouth(){
+        cursorLocation = cursorLocation.getSouth();
     }
 
     // Camera Navigation Methods

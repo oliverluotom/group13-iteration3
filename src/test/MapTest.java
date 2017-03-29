@@ -75,14 +75,30 @@ public class MapTest {
     }
 
     @Test
-    public void testFileToMap() throws Exception{
+    public void testInvalidFileToMap() throws Exception{
         Map map = new Map();
-        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/model/map/mapFileRead.txt");
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/model/map/mapFileReadInvalid.txt");
+
+        mapManager.fillMapFromTextFile();
+
+        assertEquals(map.getTiles().size(), 0);
+        assertEquals(map.getRivers().size(), 0);
+
+        // need to print edges and tiles to check if they are correct
+        map.printRivers();
+        map.printTiles();
+    }
+
+    // TODO: create better valid map text file
+    @Test
+    public void testValidFileToMap() throws Exception{
+        Map map = new Map();
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/model/map/mapFileReadValid.txt");
 
         mapManager.fillMapFromTextFile();
 
         assertEquals(map.getTiles().size(), 7);
-        assertEquals(map.getRivers().size(), 2);
+        assertEquals(map.getRivers().size(), 0);
 
         // need to print edges and tiles to check if they are correct
         map.printRivers();
