@@ -77,6 +77,13 @@ public class MapFileManager {
 
             }
 
+            // check that all rivers connect correctly
+            if(!map.validateAllRiverLocations()) {
+                System.out.println("Invalid river setup, check text file.");
+                map.clearRivers();
+                map.clearTiles();
+            }
+
 
     }
 
