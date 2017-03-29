@@ -311,7 +311,7 @@ public class Map {
     }
 
     public boolean isValidPlacement(Location location, Terrain terrain, ArrayList<Integer> riverEdges) {
-        return( validateLocationRange(location) && validateRiverLocation(location, new River(riverEdges)) && validateTileAdjacency(location) && validateTileLocation(location, new Tile(terrain)));
+        return( validateLocationRange(location) && validateRiverLocation(location, new River(riverEdges)) && validateTileAdjacency(location) );
 
     }
     
