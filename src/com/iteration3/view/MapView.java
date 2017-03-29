@@ -63,6 +63,7 @@ public class MapView extends Pane{
 
         //gc.drawImage(images.getImage("desert"), 200, 200);
 
+
         int numTiles = 21;
         for(int x = 0; x <= 11; x++){
             for(int y = 0; y <= numTiles; y++){
