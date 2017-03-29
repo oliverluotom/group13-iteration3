@@ -4,6 +4,9 @@ import com.iteration3.model.map.MapFileManager;
 import com.iteration3.model.tile.*;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -118,6 +121,36 @@ public class MapTest {
 
     }
 
+    @Test
+    public void testControllerValidation() throws Exception{
+        Map map = new Map();
+        map.getTiles().put(new Location(0,0,0), new Tile(new SeaTerrain()));
+        /*map.getTiles().put(new Location(1,-1,1), new Tile(new SeaTerrain()));
+        map.getTiles().put(new Location(-1,1,1), new Tile(new SeaTerrain()));
+        map.getTiles().put(new Location(-1,1,-1), new Tile(new SeaTerrain()));
+        map.getTiles().put(new Location(1,1,1), new Tile(new SeaTerrain()));*/
+
+
+        Location location = new Location(0,1,-1);
+        assertEquals(true, map.validateLocationRange(location));
+        assertEquals(true, map.validateRiverLocation(location, new River(1)));
+        assertEquals(true, map.validateTileLocation(location, new Tile(new SeaTerrain())));
+        assertEquals(true, map.validateTileAdjacency(location));
+
+        assertEquals(true, map.isValidPlacement(location,new SeaTerrain(),new ArrayList<>(Arrays.asList(1,2,3,7,8,9))));
+
+
+        map.addTileFromFile(new Location(1,0,-1), new Tile(new WoodsTerrain()));
+
+
+        location = new Location(1,0,-1);
+        assertEquals(true, map.validateLocationRange(location));
+        assertEquals(true, map.validateTileLocation(location, new Tile(new SeaTerrain())));
+        //assertEquals(true, map.validateTileAdjacency(location));
+
+        assertEquals(true, map.validateRiverLocation(location, new River(1)));
+        assertEquals(true, map.isValidPlacement(new Location(1,0,-1), new MountainTerrain(), new ArrayList<>(Arrays.asList(1))));
+    }
 
 
 }

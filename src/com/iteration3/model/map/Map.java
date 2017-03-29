@@ -1,8 +1,10 @@
 package com.iteration3.model.map;
 
 import com.iteration3.model.tile.River;
+import com.iteration3.model.tile.Terrain;
 import com.iteration3.model.tile.TerrainTypeVisitor;
 import com.iteration3.model.tile.Tile;
+import com.sun.javafx.geom.Edge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -258,6 +260,9 @@ public class Map {
         if(tiles.size()==0){
             return true;
         }
+        if(tiles.containsKey(l)){
+            return true;
+        }
         if(!tiles.containsKey(l)) {
             if (tiles.containsKey(l.getNorth())) {
                 return true;
@@ -301,6 +306,11 @@ public class Map {
             System.out.println(tiles.get(location) + " " + Integer.toString(location.getX()) + " " +  Integer.toString(location.getY()) + " " + Integer.toString(location.getZ()));
             System.out.println("Terrain: " + tiles.get(location).getTerrain(new TerrainTypeVisitor()));
         }
+    }
+
+    public boolean isValidPlacement(Location location, Terrain terrain, ArrayList<Integer> riverEdges) {
+        return( validateLocationRange(location) && validateRiverLocation(location, new River(riverEdges)) && validateTileAdjacency(location) && validateTileLocation(location, new Tile(terrain)));
+
     }
 
 }

@@ -64,6 +64,7 @@ public class MapView extends Pane{
         gc.setFill(Color.BLACK);
         gc.fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
         gc.setFill(Color.WHITE);
+
         drawCursor();
 
         for(int x = -size; x <= size; x++){
