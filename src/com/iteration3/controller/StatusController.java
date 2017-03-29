@@ -67,7 +67,8 @@ public class StatusController implements Observer, Visitor {
         rotateState = new RotateState(this,window);
         
         setCurrentState(selectTerrain);
-        window.highlightTerrainOption();
+        if(isValidSubmission())window.highlightTerrainOption();
+		else window.invalidateTerrainOption();
         
         mapControls();
         setOnClickSubmit();
@@ -87,6 +88,10 @@ public class StatusController implements Observer, Visitor {
 
     public void cylceRight(){
     	currentState.cycleRight();
+    }
+    
+    public void validateState() {
+    	currentState.validateState();
     }
 
     public void setCurrentState(StatusControllerState state) {
@@ -410,8 +415,7 @@ public class StatusController implements Observer, Visitor {
 	public void update() {
 		// TODO Auto-generated method stub
 		cursorLocation = window.getCursorLocation();
-		if(isValidSubmission()) window.enableSubmit();
-		else window.disableSubmit();
+		validateState();
 	}
 
 	@Override

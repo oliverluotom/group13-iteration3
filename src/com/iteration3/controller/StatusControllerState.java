@@ -6,4 +6,5 @@ public interface StatusControllerState {
 	public void cycleDown();
 	public void cycleLeft();
 	public void cycleRight();
+	public void validateState();
 }
