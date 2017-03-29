@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 
 import com.iteration3.model.GameModel;
@@ -53,7 +55,7 @@ public class StatusController {
         
         window.setTerrainType(terrainTypes.get(selectedTerrainIndex));
         window.setRiverType(riverTypes.get(selectedRiverIndex));
-        window.setRotateOption("Rotate Tile with Arrow Keys");
+        window.setRotateOption("Must Select River to Rotate with Arrow Keys");
         
         selectTerrain = new SelectTerrain(this,window);
         selectRiver = new SelectRiver(this,window);
@@ -63,6 +65,7 @@ public class StatusController {
         window.highlightTerrainOption();
         
         mapControls();
+        setOnClickSubmit();
     }
 
     public void cycleUP(){
@@ -121,8 +124,45 @@ public class StatusController {
     	return terrainTypes.get(selectedTerrainIndex);
     }
     
+    public ArrayList<Integer> rotateEdgesClockWise(ArrayList<Integer> edges) {
+    	for(int i = 0; i < edges.size();i++) {
+    		edges.set(i, edges.get(i) + 1);
+    		if(edges.get(i) > 6) edges.set(i, 1);
+    		
+    	}
+    	
+    	return edges;
+    }
+    
+    public ArrayList<Integer> rotateEdgesCounterClockWise(ArrayList<Integer> edges) {
+    	for(int i = 0; i < edges.size();i++) {
+    		edges.set(i, edges.get(i) - 1);
+    		if(edges.get(i) < 1) edges.set(i, 6);
+    		
+    	}
+    	
+    	return edges;
+    }
+    
+   public ArrayList<Integer> getCurrentRiverEdges() {
+	   return riverMap.get(getSelectedRiverType()) ;
+   }
+    
+   public boolean hasSelectedRiver() {
+	   if(riverMap.get(getSelectedRiverType()) != null) return true;
+	   return false;
+   }
+   
     public String getSelectedRiverType() {
     	return riverTypes.get(selectedRiverIndex);
+    }
+    
+    public Terrain getSlectedTerrain() {
+    	return terrainMap.get(terrainTypes.get(selectedTerrainIndex));
+    }
+    
+    public void setCurrentlySelectedRiverEdges(ArrayList<Integer> edges) {
+    	riverMap.put(getSelectedRiverType(), edges);
     }
     
     private void mapControls() {
@@ -203,5 +243,44 @@ public class StatusController {
     	riverMap.put("Adjacent Edge River",new ArrayList<Integer>(Arrays.asList(1,3,5)));
     	
     	
+    }
+    
+    public boolean isvalidSubmission() {
+    	if(hasSelectedRiver()) {
+			if(model.isValidPlacement(window.getCursorLocation(),getSlectedTerrain(), getCurrentRiverEdges())) {
+				return true;
+			} 
+			else {
+				return false;
+			}
+		}
+		else {
+			if(model.isValidPlacement(window.getCursorLocation(),getSlectedTerrain())) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+    	
+    }
+    
+    public void setOnClickSubmit() {
+    	
+    	EventHandler<ActionEvent> onSumbit = new EventHandler<ActionEvent> () {
+
+			public void handle(ActionEvent event) {
+				
+				if(hasSelectedRiver()) {
+					
+					model.addRiverFromGUI(window.getCursorLocation(), riverMap.get(riverTypes.get(selectedRiverIndex)));
+				}
+				
+				model.addTileFromGUI(window.getCursorLocation(), terrainMap.get(terrainTypes.get(selectedTerrainIndex)));
+			}
+    		
+    	};
+    	
+    	window.setOnClickSubmit(onSumbit);
     }
 }
