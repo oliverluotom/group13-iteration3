@@ -56,7 +56,7 @@ public class MapView extends Pane{
     }
 
     private void initializePane() {
-        this.mapCanvas.addEventFilter(MouseEvent.MOUSE_MOVED, // for camera movement
+        this.mapCanvas.addEventFilter(MouseEvent.MOUSE_DRAGGED, // for camera movement
                 event -> {
                     if (canMoveCameraRight(event.getSceneX())) {
                         moveCameraRight();
