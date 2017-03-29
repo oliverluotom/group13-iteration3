@@ -60,16 +60,15 @@ public class MapView extends Pane{
         gc.setFill(Color.BLACK);
         gc.fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
         gc.setFill(Color.WHITE);
-        //gc.drawImage(images.getImage("desert"), 200, 200);
         gc.drawImage(images.getImage("cursor"), 200, 200);
         //gc.drawImage(images.getImage("desert"), 200, 200);
         for(int x = -5; x <= 5; x++){
             for(int y = -5; y <= 5; y++){
                 if(x%2==0){
-                    gc.drawImage(images.getImage("desert"), (x + 5) * 52, (y + 5) * 60 + 30);
+                    gc.drawImage(images.getImage("empty"), (x + 11) * 52, (y + 5) * 60 + 30);
                 }
                 else {
-                    gc.drawImage(images.getImage("desert"), (x + 5) * 52, (y + 5) * 60);
+                    gc.drawImage(images.getImage("empty"), (x + 11) * 52, (y + 5) * 60);
                 }
             }
         }
