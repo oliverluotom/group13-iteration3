@@ -8,6 +8,7 @@ import com.iteration3.model.tile.Terrain;
 import com.iteration3.model.tile.Tile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GameModel {
     private Map map;
@@ -31,6 +32,12 @@ public class GameModel {
         getMap().addTileFromFile(location,tile);
     }
 
+    public void addRiverFromGUI(Location location, ArrayList<Integer> edges) {
+        River river = new River(edges);
+
+        getMap().addRiverFromGUI(location,river);
+    }
+    
     public void addRiverFromGUI(Location location, int edge1) {
         River river = new River(edge1);
 
