@@ -63,7 +63,7 @@ public class Location {
     }
 
     public boolean outOfBounds(int size){
-        if(x+z<=size && x+z>=-size){
+        if(x+z<=size && x+z>=-size && x<=size && x>=-size && z<=size && z>=-size){
             return true;
         }
         return false;
