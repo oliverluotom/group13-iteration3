@@ -56,12 +56,9 @@ public class Map {
         return true;
     }
 
-    public void clearTiles() {
-        tiles.clear();
-    }
-
-    public void clearRivers() {
+    public void clearMap() {
         rivers.clear();
+        tiles.clear();
     }
 
 
