@@ -97,8 +97,8 @@ public class MapTest {
 
         mapManager.fillMapFromTextFile();
 
-        assertEquals(map.getTiles().size(), 7);
-        assertEquals(map.getRivers().size(), 0);
+        assertEquals(map.getTiles().size(), 19);
+        assertEquals(map.getRivers().size(), 7);
 
         // need to print edges and tiles to check if they are correct
         map.printRivers();
