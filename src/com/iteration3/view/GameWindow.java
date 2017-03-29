@@ -92,6 +92,10 @@ public class GameWindow extends BorderPane {
 		this.setOnKeyPressed(handler);
 	}
 
+	public void drawTile(String imageURL, int x, int y) {
+    	mapView.drawTile(imageURL, x, y);
+	}
+
 	public void update(){
     	mapView.update();
 	}

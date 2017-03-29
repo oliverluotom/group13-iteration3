@@ -96,6 +96,7 @@ public class MapView extends Pane{
         }
 
         drawCursor();
+
     }
 
     public Location getCursorLocation(){
@@ -219,6 +220,11 @@ public class MapView extends Pane{
             return true;
         }
         return false;
+    }
+
+    public void drawTile(String imageURL, int x, int y) {
+        System.out.println(imageURL);
+        gc.drawImage(images.getImage(imageURL), (x + 11) * 52, (y + 3) * 60 + (30 * x));
     }
 
 }
