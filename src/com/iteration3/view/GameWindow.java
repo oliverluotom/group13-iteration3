@@ -1,5 +1,6 @@
 package com.iteration3.view;
 
+import com.iteration3.model.map.Location;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
@@ -81,12 +82,32 @@ public class GameWindow extends BorderPane {
 		statusView.setOnClickRemove(handler);
 	}
 
-	public void moveCursorNW(){}
-	public void moveCursorNE(){}
-	public void moveCursorSW(){}
-	public void moveCursorSE(){}
-	public void moveCursorNorth(){}
-	public void moveCursorSouth(){}
+	public void update(){
+    	mapView.update();
+	}
+
+	public void moveCursorNW(){
+		mapView.moveCursorNW();
+	}
+	public void moveCursorNE(){
+		mapView.moveCursorNE();
+	}
+	public void moveCursorSW(){
+		mapView.moveCursorSW();
+	}
+	public void moveCursorSE(){
+		mapView.moveCursorSE();
+	}
+	public void moveCursorNorth(){
+		mapView.moveCursorNorth();
+	}
+	public void moveCursorSouth(){
+		mapView.moveCursorSouth();
+	}
+
+	public Location getCursorLocation(){
+		return mapView.getCursorLocation();
+	}
 	public void setOnClickImport(EventHandler<ActionEvent> handler){} // TODO
 	public void setOnClickExport(EventHandler<ActionEvent> handler){} // TODO
 }
