@@ -1,9 +1,10 @@
-package iteration3.controller;
+package com.iteration3.controller;
 
 import com.iteration3.model.map.*;
 import javafx.event.EventHandler;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 public class MapFileController {
     Map map;
@@ -13,17 +14,32 @@ public class MapFileController {
 
     MapFileController(Map map){
         this.map = map;
-        fileLocation = "default"; // TODO: default user home directory?
+        String fileLocation = "~/"; // TODO: default user home directory?
+        String fileName = "boatsAndRoadsMap.txt";
+
+        // TODO: verify that this is implemented as needed
+        EventHandler<ActionEvent> mapFileHandler = new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                // TODO
+            }
+        };
+
     }
 
-    saveMap(String directory, String name){
-
+    public void saveMap(String directory, String name){
+        try {
+            fileManager.fillTextFileFromMap();
+        } catch(IOException e){
+            System.out.println("Error saving map!");
+        }
     }
 
-    loadMap(String directory, String name){
-
+    public void loadMap(String directory, String name) throws IOException {
+        try {
+            fileManager.fillMapFromTextFile();
+        } catch(IOException e){
+            System.out.println("Error loading map!");
+        }
     }
-
-    EventHandler<ActionEvent> fileImportHandler = new EventHandler<ActionEvent>();
-           handle(ActionEvent e);
 }
