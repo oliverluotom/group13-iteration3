@@ -29,6 +29,8 @@ public class ModelViewAdapter implements Visitor {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        map.printRivers();
         drawTiles(map);
         drawRivers(map);
     }
@@ -73,59 +75,55 @@ public class ModelViewAdapter implements Visitor {
                 }
             }
             else if(riverEdges.size() == 2) {
-                // handle adjacent rivers
-                if(riverEdges.get(0) - riverEdges.get(1) == Math.abs(1)) {
-                    if(riverEdges.contains(1) && riverEdges.contains(2)) {
-                        gameWindow.drawRiver("adj1",  currentLocation.getX(), currentLocation.getZ());
-                    }
-                    else if(riverEdges.contains(2) && riverEdges.contains(3)) {
-                        gameWindow.drawRiver("adj2",  currentLocation.getX(), currentLocation.getZ());
-                    }
-                    else if(riverEdges.contains(3) && riverEdges.contains(4)) {
-                        gameWindow.drawRiver("adj3",  currentLocation.getX(), currentLocation.getZ());
-                    }
-                    else if(riverEdges.contains(4) && riverEdges.contains(5)) {
-                        gameWindow.drawRiver("adj4",  currentLocation.getX(), currentLocation.getZ());
-                    }
-                    else if(riverEdges.contains(5) && riverEdges.contains(6)) {
-                        gameWindow.drawRiver("adj5",  currentLocation.getX(), currentLocation.getZ());
-                    }
-                    else if(riverEdges.contains(6) && riverEdges.contains(1)) {
-                        gameWindow.drawRiver("adj6",  currentLocation.getX(), currentLocation.getZ());
-                    }
+            // handle adjacent rivers
+                if(riverEdges.contains(1) && riverEdges.contains(2)) {
+                    gameWindow.drawRiver("adj1",  currentLocation.getX(), currentLocation.getZ());
                 }
-                // handle angled rivers
-                else if(riverEdges.get(0) - riverEdges.get(1) == Math.abs(2)) {
-                    if(riverEdges.contains(1) && riverEdges.contains(3)) {
-                        gameWindow.drawRiver("angled1",  currentLocation.getX(), currentLocation.getZ());
-                    }
-                    else if(riverEdges.contains(2) && riverEdges.contains(4)) {
-                        gameWindow.drawRiver("angled2",  currentLocation.getX(), currentLocation.getZ());
-                    }
-                    else if(riverEdges.contains(3) && riverEdges.contains(5)) {
-                        gameWindow.drawRiver("angled3",  currentLocation.getX(), currentLocation.getZ());
-                    }
-                    else if(riverEdges.contains(4) && riverEdges.contains(6)) {
-                        gameWindow.drawRiver("angled4",  currentLocation.getX(), currentLocation.getZ());
-                    }
-                    else if(riverEdges.contains(5) && riverEdges.contains(1)) {
-                        gameWindow.drawRiver("angled5",  currentLocation.getX(), currentLocation.getZ());
-                    }
-                    else if(riverEdges.contains(6) && riverEdges.contains(2)) {
-                        gameWindow.drawRiver("angled6",  currentLocation.getX(), currentLocation.getZ());
-                    }
+                else if(riverEdges.contains(2) && riverEdges.contains(3)) {
+                    gameWindow.drawRiver("adj2",  currentLocation.getX(), currentLocation.getZ());
                 }
-                else if(riverEdges.get(0) - riverEdges.get(1) == Math.abs(3)) {
-                    if(riverEdges.contains(1) && riverEdges.contains(4)) {
-                        gameWindow.drawRiver("straight1",  currentLocation.getX(), currentLocation.getZ());
-                    }
-                    else if(riverEdges.contains(2) && riverEdges.contains(5)) {
-                        gameWindow.drawRiver("straight2",  currentLocation.getX(), currentLocation.getZ());
-                    }
-                    else if(riverEdges.contains(3) && riverEdges.contains(6)) {
-                        gameWindow.drawRiver("straight3",  currentLocation.getX(), currentLocation.getZ());
-                    }
+                else if(riverEdges.contains(3) && riverEdges.contains(4)) {
+                    gameWindow.drawRiver("adj3",  currentLocation.getX(), currentLocation.getZ());
                 }
+                else if(riverEdges.contains(4) && riverEdges.contains(5)) {
+                    gameWindow.drawRiver("adj4",  currentLocation.getX(), currentLocation.getZ());
+                }
+                else if(riverEdges.contains(5) && riverEdges.contains(6)) {
+                    gameWindow.drawRiver("adj5",  currentLocation.getX(), currentLocation.getZ());
+                }
+                else if(riverEdges.contains(6) && riverEdges.contains(1)) {
+                    gameWindow.drawRiver("adj6",  currentLocation.getX(), currentLocation.getZ());
+                }
+                // handle angled
+                else if(riverEdges.contains(1) && riverEdges.contains(3)) {
+                    gameWindow.drawRiver("angled1",  currentLocation.getX(), currentLocation.getZ());
+                }
+                else if(riverEdges.contains(2) && riverEdges.contains(4)) {
+                    gameWindow.drawRiver("angled2",  currentLocation.getX(), currentLocation.getZ());
+                }
+                else if(riverEdges.contains(3) && riverEdges.contains(5)) {
+                    gameWindow.drawRiver("angled3",  currentLocation.getX(), currentLocation.getZ());
+                }
+                else if(riverEdges.contains(4) && riverEdges.contains(6)) {
+                    gameWindow.drawRiver("angled4",  currentLocation.getX(), currentLocation.getZ());
+                }
+                else if(riverEdges.contains(5) && riverEdges.contains(1)) {
+                    gameWindow.drawRiver("angled5",  currentLocation.getX(), currentLocation.getZ());
+                }
+                else if(riverEdges.contains(6) && riverEdges.contains(2)) {
+                    gameWindow.drawRiver("angled6",  currentLocation.getX(), currentLocation.getZ());
+                }
+                // handle straight
+                else if(riverEdges.contains(1) && riverEdges.contains(4)) {
+                    gameWindow.drawRiver("straight1",  currentLocation.getX(), currentLocation.getZ());
+                }
+                else if(riverEdges.contains(2) && riverEdges.contains(5)) {
+                    gameWindow.drawRiver("straight2",  currentLocation.getX(), currentLocation.getZ());
+                }
+                else if(riverEdges.contains(3) && riverEdges.contains(6)) {
+                    gameWindow.drawRiver("straight3",  currentLocation.getX(), currentLocation.getZ());
+                }
+
             }
             // handle triple rivers
             else if(riverEdges.size() == 3) {
