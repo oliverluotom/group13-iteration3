@@ -21,8 +21,8 @@ public class SelectTerrain implements StatusControllerState {
 			window.setRotateOption("Rotate Tile with Arrow Keys");
 		}
 		else {
-			window.invalidateRiverOption();
-			window.setRiverType("Must Select River to Rotate with Arrow Keys");
+			window.invalidateRotateOption();
+			window.setRotateOption("Must Select River to Rotate with Arrow Keys");
 		}
 		context.setCurrentState(context.getRotateState());
 	}
@@ -39,7 +39,7 @@ public class SelectTerrain implements StatusControllerState {
 		// TODO Auto-generated method stub
 		context.decrementTerrainIndex();
 		window.setTerrainType(context.getSelectedTerrainType());
-		if(context.isvalidSubmission()) window.enableSubmit();
+		if(context.isValidSubmission()) window.enableSubmit();
 		else window.disableSubmit();
 	}
 
@@ -48,7 +48,7 @@ public class SelectTerrain implements StatusControllerState {
 		// TODO Auto-generated method stub
 		context.incrementTerrainIndex();
 		window.setTerrainType(context.getSelectedTerrainType());
-		if(context.isvalidSubmission()) window.enableSubmit();
+		if(context.isValidSubmission()) window.enableSubmit();
 		else window.disableSubmit();
 	}
 
