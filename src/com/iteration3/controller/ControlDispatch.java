@@ -1,6 +1,8 @@
 package com.iteration3.controller;
 
+import com.iteration3.model.GameModel;
 import com.iteration3.model.map.Map;
+import com.iteration3.view.GameWindow;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
@@ -14,11 +16,14 @@ import javafx.scene.input.KeyEvent;
 public class ControlDispatch implements EventHandler<KeyEvent>{
 
     private ControlDispatchState currentState;
-    Map map;
+    private MapEditorControlState mapEditorState;
 
-    public ControlDispatch(Map map, ControlDispatchState state){
-        setCurrentState(state);
-        this.map = map;
+    public ControlDispatch(GameModel model, GameWindow window){
+        
+    	mapEditorState = new MapEditorControlState(model,window);
+    			
+    	setCurrentState(mapEditorState);
+    	window.addKeyHandler(this);
     }
 
     public void setCurrentState(ControlDispatchState state){
@@ -27,7 +32,7 @@ public class ControlDispatch implements EventHandler<KeyEvent>{
    
 	@Override
 	public void handle(KeyEvent event) {
-		// TODO Auto-generated method stub
 		
+		currentState.handleInput(event);
 	}
 }

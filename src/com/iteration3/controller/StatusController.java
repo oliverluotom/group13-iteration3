@@ -10,7 +10,6 @@ import com.iteration3.view.GameWindow;
 
 public class StatusController {
     
-	Map map;
 	GameModel model; 
 	GameWindow window;
     HashMap<KeyCode,Action> keyMap;
@@ -22,9 +21,10 @@ public class StatusController {
     int selectedRiver;
     int mode;
 
-    public StatusController(Map map, HashMap<KeyCode,Action> keyMap){
-        this.map = map;
+    public StatusController(GameModel model, GameWindow window, HashMap<KeyCode,Action> keyMap){
+        this.model = model;
         this.keyMap = keyMap;
+        this.window = window;
         mode = 0;
         
         terrainMap = new HashMap<>();
@@ -80,6 +80,37 @@ public class StatusController {
     	
     	userOptions.add(terrains);
     	selectedTerrain = 0;
+    	window.setTerrainType(terrains.get(selectedTerrain));
+    	window.highlightTerrainOption();
+    	
+    	Action leftAction = new Action(){
+			@Override
+			public void execute() {
+				// TODO Auto-generated method stub
+				selectedTerrain--;
+				if(selectedTerrain < 0) selectedTerrain = terrains.size() -1;
+				window.highlightTerrainOption();
+				window.setTerrainType(userOptions.get(mode).get(selectedTerrain));
+			}
+    		
+    	};
+    	
+    	Action rightAction = new Action(){
+			@Override
+			public void execute() {
+				// TODO Auto-generated method stub
+				selectedTerrain++;
+				if(selectedTerrain >= terrains.size()) selectedTerrain = 0;
+				window.highlightTerrainOption();
+				window.setTerrainType(userOptions.get(mode).get(selectedTerrain));
+			}
+    		
+    	};
+    	
+    	keyMap.put(KeyCode.LEFT, leftAction);
+    	keyMap.put(KeyCode.RIGHT, rightAction);
   
     }
+    
+   
 }

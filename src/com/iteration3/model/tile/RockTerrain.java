@@ -1,10 +1,19 @@
 package com.iteration3.model.tile;
 
-public class RockTerrain extends Terrain implements iTerrainVisitable {
+import com.iteration3.utilities.Visitable;
+import com.iteration3.utilities.Visitor;
+
+public class RockTerrain extends Terrain implements iTerrainVisitable, Visitable {
 
     @Override
     public String getTerrainType(iTerrainVisitor visitor) {
         return visitor.getType(this);
     }
+
+	@Override
+	public void acceptVisitor(Visitor visitor) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

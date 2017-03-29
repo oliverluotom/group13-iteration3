@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -39,6 +40,10 @@ public class GameWindow extends BorderPane {
         //TODO: Add Status View to the addAll() call below
         this.setCenter(mapView);
         this.setBottom(statusView);
+    }
+    
+    public void highlightTerrainOption() {
+    	statusView.highlightTerrainOption();
     }
     
     public void highlightRiverOption() {
@@ -79,6 +84,10 @@ public class GameWindow extends BorderPane {
 	
 	public void setOnClickRemove(EventHandler<ActionEvent> handler) {
 		statusView.setOnClickRemove(handler);
+	}
+	
+	public void addKeyHandler(EventHandler <KeyEvent> handler) {
+		this.setOnKeyPressed(handler);
 	}
 
 	public void moveCursorNW(){}
