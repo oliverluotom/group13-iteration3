@@ -28,7 +28,7 @@ public class CursorController implements Observable {
         this.keyMap = keymap;
         this.window = window;
 
-        location = new Location(0,0,0);
+        
         observers = new ArrayList<>();
 
         initializeKeyMap();
@@ -41,7 +41,7 @@ public class CursorController implements Observable {
             public void execute(){
                 window.moveCursorSW();
 
-                location.getSouthWest();
+                
                 notifyAllObservers();
 
             }
@@ -51,7 +51,7 @@ public class CursorController implements Observable {
             public void execute(){
                 window.moveCursorNW();
 
-                location.getNorthWest();
+                
                 notifyAllObservers();
 
             }
@@ -61,7 +61,7 @@ public class CursorController implements Observable {
             public void execute(){
                 window.moveCursorNorth();
 
-                location.getNorth();
+                
                 notifyAllObservers();
 
             }
@@ -71,7 +71,7 @@ public class CursorController implements Observable {
             public void execute(){
                 window.moveCursorNE();
 
-                location.getNorthEast();
+                
                 notifyAllObservers();
 
             }
@@ -81,7 +81,6 @@ public class CursorController implements Observable {
             public void execute(){
                 window.moveCursorSE();
 
-                location.getSouthEast();
                 notifyAllObservers();
 
             }
@@ -91,16 +90,10 @@ public class CursorController implements Observable {
             public void execute(){
                 window.moveCursorSouth();
 
-                location.getSouth();
                 notifyAllObservers();
 
             }
         });
-    }
-
-
-    public Location getCursorLocation(){
-        return location;
     }
 
 	@Override
