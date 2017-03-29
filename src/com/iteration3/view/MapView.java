@@ -61,6 +61,7 @@ public class MapView extends Pane{
         gc.fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
         gc.setFill(Color.WHITE);
         gc.drawImage(images.getImage("desert"), 200, 200);
+        gc.drawImage(images.getImage("cursor"), 200, 200);
     }
 
     // Camera Navigation Methods
