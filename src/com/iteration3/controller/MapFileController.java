@@ -1,9 +1,8 @@
 package com.iteration3.controller;
 
 import com.iteration3.model.map.*;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class MapFileController {
@@ -18,13 +17,18 @@ public class MapFileController {
         String fileName = "boatsAndRoadsMap.txt";
 
         // TODO: verify that this is implemented as needed
-        EventHandler<ActionEvent> mapFileHandler = new EventHandler<ActionEvent>(){
+        EventHandler<ActionEvent> mapFileImporter = new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent e){
                 // TODO
             }
         };
-
+        EventHandler<ActionEvent> mapFileExporter = new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                // TODO
+            }
+        };
     }
 
     public void saveMap(String directory, String name){
