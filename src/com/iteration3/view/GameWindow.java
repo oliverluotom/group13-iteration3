@@ -44,9 +44,10 @@ public class GameWindow extends BorderPane {
         this.menuBar.getMenus().add(fileMenu);
 
         //TODO: Add Status View to the addAll() call below
+		this.setTop(menuBar);
         this.setCenter(mapView);
         this.setBottom(statusView);
-       
+       this.setTop(menuBar);
     }
     
     public void highlightTerrainOption() {
@@ -97,8 +98,12 @@ public class GameWindow extends BorderPane {
 		this.setOnKeyPressed(handler);
 	}
 
+	public void drawRiver(String imageURL, int x, int y) {
+    	mapView.drawRiver(imageURL, x, y);
+	}
+
 	public void drawTile(String imageURL, int x, int y) {
-    	mapView.drawTile(imageURL, x, y);
+		mapView.drawTile(imageURL, x, y);
 	}
 
 	public void update(){
