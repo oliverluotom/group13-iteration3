@@ -1,5 +1,10 @@
 package com.iteration3.controller;
-
+/*--------------------------------------------------------------------------------------
+|    StatusController: Created by Ricardo on 3/28/17.
+|---------------------------------------------------------------------------------------
+|   Controller responsible for defining actions related to cycling through tiles
+|   options and finally submitting a tile for creation
+---------------------------------------------------------------------------------------*/
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

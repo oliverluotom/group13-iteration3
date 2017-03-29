@@ -1,5 +1,11 @@
 package com.iteration3.controller;
-
+/*--------------------------------------------------------------------------------------
+|    CursorController: Created by Clay on 3/27/17.
+|---------------------------------------------------------------------------------------
+|   Controller to define functions for moving around the map to select a tile
+|   Cursor keeps track of its location on the map
+---------------------------------------------------------------------------------------*/
+import com.iteration3.model.map.Location;
 import com.iteration3.model.map.Map;
 import com.iteration3.view.GameWindow;
 import javafx.scene.input.KeyCode;
@@ -10,48 +16,61 @@ public class CursorController {
     Map map;
     HashMap<KeyCode,Action> keyMap;
     GameWindow window;
-    int mode;
-    int index;
+    Location location;
 
     public CursorController(Map map, GameWindow window, HashMap<KeyCode, Action> keymap){
         this.map = map;
         this.keyMap = keymap;
+        this.window = window;
+        location = new Location(0,0,0);
+        initializeKeyMap();
+    }
 
-        keymap.put(KeyCode.NUMPAD1, new Action(){
+    private void initializeKeyMap(){
+        keyMap.put(KeyCode.NUMPAD1, new Action(){
             public void execute(){
                 window.moveCursorSW();
+                location.getSouthWest();
             }
         });
 
-        keymap.put(KeyCode.NUMPAD7, new Action(){
+        keyMap.put(KeyCode.NUMPAD7, new Action(){
             public void execute(){
                 window.moveCursorNW();
+                location.getNorthWest();
             }
         });
 
-        keymap.put(KeyCode.NUMPAD8, new Action(){
+        keyMap.put(KeyCode.NUMPAD8, new Action(){
             public void execute(){
                 window.moveCursorNorth();
+                location.getNorth();
             }
         });
 
-        keymap.put(KeyCode.NUMPAD9, new Action(){
+        keyMap.put(KeyCode.NUMPAD9, new Action(){
             public void execute(){
                 window.moveCursorNE();
+                location.getNorthEast();
             }
         });
 
-        keymap.put(KeyCode.NUMPAD3, new Action(){
+        keyMap.put(KeyCode.NUMPAD3, new Action(){
             public void execute(){
                 window.moveCursorSE();
+                location.getSouthEast();
             }
         });
 
-        keymap.put(KeyCode.NUMPAD2, new Action(){
+        keyMap.put(KeyCode.NUMPAD2, new Action(){
             public void execute(){
                 window.moveCursorSouth();
+                location.getSouth();
             }
         });
+    }
 
+    public Location getCursorLocation(){
+        return location;
     }
 }

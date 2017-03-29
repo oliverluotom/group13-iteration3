@@ -24,6 +24,7 @@ public class Assets {
         images.put("sea", new Image("sea.png"));
         images.put("woods", new Image("woods.png"));
         images.put("empty", new Image("empty.png"));
+        images.put("cursor", new Image("cursor.png"));
     }
 
     public Image getImage(String imageName) {

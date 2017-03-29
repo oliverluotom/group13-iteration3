@@ -4,10 +4,10 @@ package com.iteration3.controller;
 import javafx.scene.input.KeyEvent;
 
 /*--------------------------------------------------------------------------------------
-|    ${NAME} Module: Created by ${USER} on ${DATE}.
+|    ControlDispatchState: Created by Clay on 3/27/17.
 |---------------------------------------------------------------------------------------
-|   Description:
-|
+|   Interface for all control state objects
+|   ControlDispatch will send key input to states for handling
 ---------------------------------------------------------------------------------------*/
 public interface ControlDispatchState {
 

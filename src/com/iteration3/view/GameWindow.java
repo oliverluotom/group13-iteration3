@@ -97,4 +97,6 @@ public class GameWindow extends BorderPane {
 	public void moveCursorSE(){}
 	public void moveCursorNorth(){}
 	public void moveCursorSouth(){}
+	public void setOnClickImport(EventHandler<ActionEvent> handler){} // TODO
+	public void setOnClickExport(EventHandler<ActionEvent> handler){} // TODO
 }
