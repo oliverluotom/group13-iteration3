@@ -17,7 +17,7 @@ import java.io.File;
 
 public class GameWindow extends BorderPane {
     private MenuBar menuBar;
-    private MenuItem importMapFileItem, exportMapFileItem;
+    private MenuItem importMapFileItem, exportMapFileItem, newMap;
     private MapView mapView;
     private StatusView statusView;
 
@@ -35,7 +35,7 @@ public class GameWindow extends BorderPane {
         this.menuBar.prefWidthProperty().bind(this.widthProperty());
 
         Menu fileMenu = new Menu("File");
-        MenuItem newMap = new MenuItem("Create New Map");
+        newMap = new MenuItem("Create New Map");
         importMapFileItem = new MenuItem("Import Map File...");
         exportMapFileItem = new MenuItem("Export Map File...");
         fileMenu.getItems().add(newMap);
@@ -152,6 +152,14 @@ public class GameWindow extends BorderPane {
 
 	public void drawPreviewImage(String imageUrl) {
 		statusView.drawPreviewImage(imageUrl);
+	}
+	
+	public void onClickCreateMap(EventHandler<ActionEvent> handler) {
+		newMap.setOnAction(handler);
+	}
+	
+	public void clearMap() {
+		mapView.update();
 	}
 	
 }
