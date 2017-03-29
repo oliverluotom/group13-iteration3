@@ -11,6 +11,8 @@ public class River {
         this.riverEdges = new ArrayList<Integer>();
     }
 
+    public River(ArrayList<Integer> arrayList) { this.riverEdges = arrayList; }
+
     // Constructors for river types with various number of edges
     public River(int edge1) {
         this.riverEdges = new ArrayList<Integer>();
