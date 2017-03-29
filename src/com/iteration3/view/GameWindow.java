@@ -128,10 +128,19 @@ public class GameWindow extends BorderPane {
 		return mapView.getCursorLocation();
 	}
 
+	public void disableSubmit() {
+		statusView.invalidateSubmit();
+	}
+	
+	public void enableSubmit() {
+		statusView.validateSumbit();
+	}
+
 	public void setOnClickImport(EventHandler<ActionEvent> handler){
 		importMapFileItem.setOnAction(handler);
 	} // TODO
 	public void setOnClickExport(EventHandler<ActionEvent> handler){
 		exportMapFileItem.setOnAction(handler);
 	} // TODO
+
 }
