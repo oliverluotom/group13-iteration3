@@ -30,7 +30,7 @@ public class ModelViewAdapter implements Visitor {
             e.printStackTrace();
         }
 
-        map.printRivers();
+        //map.printRivers();
         drawTiles(map);
         drawRivers(map);
     }
@@ -38,7 +38,7 @@ public class ModelViewAdapter implements Visitor {
 
     private void drawTiles(Map map) {
 
-        
+
         for(Location location : map.getTiles().keySet()) {
             currentLocation = location;
             map.getTiles().get(location).getTerrain().acceptVisitor(this);
@@ -133,7 +133,6 @@ public class ModelViewAdapter implements Visitor {
                 else {
                     gameWindow.drawRiver("tri2",  currentLocation.getX(), currentLocation.getZ());
                 }
->>>>>>> 57556e0ad0587368e3a362f2b436ad0c6a2bf985
             }
 
         }
