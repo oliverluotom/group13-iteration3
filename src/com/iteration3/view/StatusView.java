@@ -36,6 +36,9 @@ public class StatusView extends VBox {
 		submitButton = new Button("Create Tile");
 		removeButton = new Button("Remove Tile");
 		
+		//submitButton.setFocusTraversable(false);
+		//removeButton.setFocusTraversable(false);
+		
 		selectTerrain = new Text("Select the tile's terrain");
 		selectRiver = new Text("Select the tile's river");
 		
