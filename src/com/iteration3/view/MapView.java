@@ -2,9 +2,12 @@ package com.iteration3.view;
 
 import com.iteration3.model.map.Location;
 import com.iteration3.utilities.Assets;
+import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
@@ -24,6 +27,10 @@ public class MapView extends Pane{
     private final int Y_OFFSET = 3;
     private final int Y_PIXEL_OFFSET = 60;
     private final int X_OFFSET2 = 30;
+
+    private final double MAX_SCALE = 2.0;
+    private final double MIN_SCALE = 0.3;
+    private double scale = 2.0;
 
     private double cameraX = -200, cameraY = -200;
     private int cameraSpeed = 16;
@@ -49,7 +56,7 @@ public class MapView extends Pane{
     }
 
     private void initializePane() {
-        this.mapCanvas.addEventFilter(MouseEvent.MOUSE_MOVED,
+        this.mapCanvas.addEventFilter(MouseEvent.MOUSE_MOVED, // for camera movement
                 event -> {
                     if (canMoveCameraRight(event.getSceneX())) {
                         moveCameraRight();
@@ -64,6 +71,7 @@ public class MapView extends Pane{
                         moveCameraDown();
                     }
                 });
+        this.mapCanvas.addEventFilter(ScrollEvent.ANY, getZoomHandler());
         this.getChildren().add(getMapCanvas());
         clearCanvas();
         drawCursor();
@@ -76,14 +84,16 @@ public class MapView extends Pane{
         for(int x = -size; x <= size; x++){
             for(int y = -size; y <= size; y++){
                 if(x+y<=size && x+y>=-size) {
-                    gc.drawImage(images.getImage("empty"), (x + getXOffset()) * getXPixelOffset() + getCameraX(), (y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x) + getCameraY());
+                    Image image = images.getImage("empty");
+                    gc.drawImage(image, ((x + getXOffset()) * getXPixelOffset())*getScale() + getCameraX(), ((y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x))*getScale() + getCameraY(), image.getWidth()*getScale(), image.getHeight()*getScale());
                 }
             }
         }
     }
 
     public void drawCursor(){
-        gc.drawImage(images.getImage("cursor"),(cursorLocation.getX()+getXOffset())*getXPixelOffset() + getCameraX(), (cursorLocation.getZ()+getYOffset())*getYPixelOffset() + (getXOffset2() * cursorLocation.getX()) + getCameraY());
+        Image image = images.getImage("cursor");
+        gc.drawImage(image,((cursorLocation.getX()+getXOffset())*getXPixelOffset())*getScale() + getCameraX(), ((cursorLocation.getZ()+getYOffset())*getYPixelOffset() + (getXOffset2() * cursorLocation.getX()))*getScale() + getCameraY(), image.getWidth()*getScale(), image.getHeight()*getScale());
     }
 
     public void update(){
@@ -219,6 +229,13 @@ public class MapView extends Pane{
         return Y_PIXEL_OFFSET;
     }
 
+    public double getScale() {
+        return scale;
+    }
+    public void setScale(double scale) {
+        this.scale = scale;
+    }
+
     private boolean canMoveCameraRight(double mousePositionX) {
         if (mousePositionX > getMaxMapXBound()) {
             return true;
@@ -257,10 +274,56 @@ public class MapView extends Pane{
     }
 
     public void drawTile(String imageURL, int x, int y) {
-        getGc().drawImage(images.getImage(imageURL), (x + getXOffset()) * getXPixelOffset() + getCameraX(), (y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x) + getCameraY());
+        Image image = images.getImage(imageURL);
+        getGc().drawImage(image, ((x + getXOffset()) * getXPixelOffset())*getScale() + getCameraX(), ((y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x))*getScale() + getCameraY(), image.getWidth()*getScale(), image.getHeight()*getScale());
     }
 
     public int getMapSizeRadius() {
         return mapSizeRadius;
+    }
+
+    public double getMaxScale() {
+        return MAX_SCALE;
+    }
+    public double getMinScale() {
+        return MIN_SCALE;
+    }
+    public EventHandler<ScrollEvent> getZoomHandler() {
+        return zoomHandler;
+    }
+
+    private EventHandler<ScrollEvent> zoomHandler = new EventHandler<ScrollEvent>() {
+        @Override
+        public void handle(ScrollEvent event) {
+            double delta = 1.1;
+            Canvas canvas = getMapCanvas();
+            double oldScale = getScale();
+
+            if (event.getDeltaY() < 0) {
+                setScale(getScale()/delta);
+            }
+            else {
+                setScale(getScale()*delta);
+            }
+
+            setScale(clamp(getScale(), getMinScale(), getMaxScale()));
+
+//            double f = (getScale() / oldScale)-1;
+//
+//            double dx = (event.getSceneX() - (canvas.getBoundsInParent().getWidth()/2 + canvas.getBoundsInParent().getMinX()));
+//            double dy = (event.getSceneY() - (canvas.getBoundsInParent().getHeight()/2 + canvas.getBoundsInParent().getMinY()));
+//
+//////            canvas.setScaleY(scale);
+////            canvas.setTranslateX(canvas.getTranslateX() - (f*dx));
+////            canvas.setTranslateY(canvas.getTranslateY() - (f*dy));
+
+            event.consume();
+        }
+    };
+
+    private static double clamp(double value, double min, double max) {
+        if (Double.compare(value, min) < 0) return min;
+        if (Double.compare(value, max) > 0) return max;
+        return value;
     }
 }
