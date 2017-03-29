@@ -11,6 +11,8 @@ import com.iteration3.model.GameModel;
 import com.iteration3.model.map.Map;
 import com.iteration3.view.GameWindow;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -33,15 +35,29 @@ public class MapEditorControlState implements ControlDispatchState{
 
         cursorController.addObserver(statusController);
 
-        //mapFileController = new MapFileController(model, window);
+        mapFileController = new MapFileController(model, window);
 
         
-        
+        setOnClearMap();
     }
 
     //execute action if it is a valid key for this state
     public void handleInput(KeyEvent event) {
         if (keyMap.containsKey(event.getCode()))
             keyMap.get(event.getCode()).execute();
+    }
+    
+    private void setOnClearMap() {
+    	
+    	EventHandler<ActionEvent> clearMap = new EventHandler<ActionEvent>() {
+
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				window.clearMap();
+			}
+    		
+    	};
+    	
+    	window.onClickCreateMap(clearMap);
     }
 }
