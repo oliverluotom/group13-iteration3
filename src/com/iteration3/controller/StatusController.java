@@ -248,10 +248,10 @@ public class StatusController {
 			public void handle(ActionEvent event) {
 				
 				if(hasSelectedRiver()) {
-					model.addRiverFromGUI(window.getCursorLocation(), riverMap.get(selectedRiverIndex));
+					model.addRiverFromGUI(window.getCursorLocation(), riverMap.get(riverTypes.get(selectedRiverIndex)));
 				}
 				
-				model.addTileFromGUI(window.getCursorLocation(), terrainMap.get(selectedTerrainIndex));
+				model.addTileFromGUI(window.getCursorLocation(), terrainMap.get(terrainTypes.get(selectedTerrainIndex)));
 			}
     		
     	};
