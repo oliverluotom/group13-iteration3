@@ -19,14 +19,16 @@ public class RotateState implements StatusControllerState {
 	@Override
 	public void cycleUp() {
 		// TODO Auto-generated method stub
-		window.highlightRiverOption();
+		if(context.isValidSubmission())window.highlightRiverOption();
+		else window.invalidateRiverOption();
 		context.setCurrentState(context.getSelectRiverState());
 	}
 
 	@Override
 	public void cycleDown() {
 		// TODO Auto-generated method stub
-		window.highlightTerrainOption();
+		if(context.isValidSubmission())window.highlightTerrainOption();
+		else window.invalidateTerrainOption();
 		context.setCurrentState(context.getSelectTerrainState());
 	}
 
@@ -37,8 +39,11 @@ public class RotateState implements StatusControllerState {
 			ArrayList<Integer> edges = context.getCurrentRiverEdges();
 			edges = context.rotateEdgesCounterClockWise(edges);
 			context.setCurrentlySelectedRiverEdges(edges);
-			if(context.isvalidSubmission()) window.enableSubmit();
-			else window.disableSubmit();
+			
+			context.displayCurrentTerrain();
+			if(context.hasSelectedRiver()) context.displayCurrentRiver();
+			
+			validateState();
 		}
 		
 	}
@@ -50,8 +55,22 @@ public class RotateState implements StatusControllerState {
 			ArrayList<Integer> edges = context.getCurrentRiverEdges();
 			edges = context.rotateEdgesClockWise(edges);
 			context.setCurrentlySelectedRiverEdges(edges);
-			if(context.isvalidSubmission()) window.enableSubmit();
-			else window.disableSubmit();
+			
+			context.displayCurrentTerrain();
+			if(context.hasSelectedRiver()) context.displayCurrentRiver();
+			
+			validateState();
+		}
+	}
+
+	@Override
+	public void validateState() {
+		// TODO Auto-generated method stub
+		if(context.isValidSubmission()) {
+			window.highlightRotateOption();
+		}
+		else {
+			window.invalidateRotateOption();
 		}
 	}
 

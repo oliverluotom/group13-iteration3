@@ -19,6 +19,7 @@ import java.util.HashMap;
 public class MapEditorControlState implements ControlDispatchState{
     private CursorController cursorController;
     private StatusController statusController;
+    private MapFileController mapFileController;
     private HashMap<KeyCode,Action> keyMap;
     GameModel model;
     GameWindow window;
@@ -29,6 +30,11 @@ public class MapEditorControlState implements ControlDispatchState{
         keyMap = new HashMap<>();
         cursorController = new CursorController(model, window, keyMap);
         statusController = new StatusController(model,window,keyMap);
+
+        cursorController.addObserver(statusController);
+
+        mapFileController = new MapFileController(model, window);
+
         
         
     }

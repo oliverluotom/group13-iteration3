@@ -1,13 +1,21 @@
 package com.iteration3.view;
 
 
+import com.iteration3.utilities.Assets;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -21,6 +29,9 @@ public class StatusView extends VBox {
 	Label terrainType, riverType, rotateOption;
 	Button submitButton, removeButton; 
 	Text selectTerrain, selectRiver;
+	Assets images;
+	Canvas previewTileCanvas;
+	GraphicsContext gc;
 	
 	public StatusView(double width, double height) {
 		
@@ -36,6 +47,9 @@ public class StatusView extends VBox {
 		submitButton = new Button("Create Tile");
 		removeButton = new Button("Remove Tile");
 		
+		images = new Assets();
+		previewTileCanvas = new Canvas(100,100);
+		gc = previewTileCanvas.getGraphicsContext2D();
 		//submitButton.setFocusTraversable(false);
 		//removeButton.setFocusTraversable(false);
 		
@@ -88,10 +102,11 @@ public class StatusView extends VBox {
 		HBox horizontalPane = new HBox(10);
 		horizontalPane.setAlignment(Pos.CENTER);
 		
-		horizontalPane.getChildren().addAll(submitButton,removeButton);
-		
+		//horizontalPane.getChildren().addAll(submitButton,removeButton);
+		this.getChildren().add(previewTileCanvas);
 		
 		this.getChildren().add(horizontalPane);
+		//this.getChildren().add(previewTileCanvas);
 		
 		selectTerrain.setFont(Font.font("Verdana", FontWeight.SEMI_BOLD, 15));
 		selectRiver.setFont(Font.font("Verdana",FontWeight.SEMI_BOLD,15));
@@ -103,6 +118,8 @@ public class StatusView extends VBox {
 		terrainType.setTextFill(Color.DARKGRAY);
 		riverType.setTextFill(Color.DARKGRAY);
 		rotateOption.setTextFill(Color.DARKGREY);
+		
+		this.setBackground(new Background(new BackgroundFill(Color.WHITE,CornerRadii.EMPTY,Insets.EMPTY)));
 	}
 	
 	public void highlightTerrainOption() {
@@ -193,6 +210,12 @@ public class StatusView extends VBox {
 	
 	public void validateSumbit() {
 		submitButton.setDisable(false);
+	}
+	
+	public void drawPreviewImage(String imageUrl) {
+		Image image = images.getImage(imageUrl);
+		gc.drawImage(image, 0, 0,100,100);
+		
 	}
 }
 

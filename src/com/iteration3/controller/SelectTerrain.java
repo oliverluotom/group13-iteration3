@@ -17,12 +17,13 @@ public class SelectTerrain implements StatusControllerState {
 	public void cycleUp() {
 		// TODO Auto-generated method stub
 		if(context.hasSelectedRiver()) {
-			window.highlightRotateOption();
+			if(context.isValidSubmission())window.highlightRotateOption();
+			else window.invalidateRotateOption();
 			window.setRotateOption("Rotate Tile with Arrow Keys");
 		}
 		else {
-			window.invalidateRiverOption();
-			window.setRiverType("Must Select River to Rotate with Arrow Keys");
+			window.invalidateRotateOption();
+			window.setRotateOption("Must Select River to Rotate with Arrow Keys");
 		}
 		context.setCurrentState(context.getRotateState());
 	}
@@ -30,7 +31,8 @@ public class SelectTerrain implements StatusControllerState {
 	@Override
 	public void cycleDown() {
 		// TODO Auto-generated method stub
-		window.highlightRiverOption();
+		if(context.isValidSubmission())window.highlightRiverOption();
+		else window.invalidateRiverOption();
 		context.setCurrentState(context.getSelectRiverState());
 	}
 
@@ -39,8 +41,11 @@ public class SelectTerrain implements StatusControllerState {
 		// TODO Auto-generated method stub
 		context.decrementTerrainIndex();
 		window.setTerrainType(context.getSelectedTerrainType());
-		if(context.isvalidSubmission()) window.enableSubmit();
-		else window.disableSubmit();
+		
+		context.displayCurrentTerrain();
+		if(context.hasSelectedRiver()) context.displayCurrentRiver();
+		
+		validateState();
 	}
 
 	@Override
@@ -48,8 +53,22 @@ public class SelectTerrain implements StatusControllerState {
 		// TODO Auto-generated method stub
 		context.incrementTerrainIndex();
 		window.setTerrainType(context.getSelectedTerrainType());
-		if(context.isvalidSubmission()) window.enableSubmit();
-		else window.disableSubmit();
+		
+		context.displayCurrentTerrain();
+		if(context.hasSelectedRiver()) context.displayCurrentRiver();
+		
+		validateState();
+	}
+
+	@Override
+	public void validateState() {
+		// TODO Auto-generated method stub
+		if(context.isValidSubmission()) {
+			window.highlightTerrainOption();
+		}
+		else {
+			window.invalidateTerrainOption();
+		}
 	}
 
 }
