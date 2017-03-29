@@ -46,7 +46,7 @@ public class GameWindow extends BorderPane {
         //TODO: Add Status View to the addAll() call below
         this.setCenter(mapView);
         this.setBottom(statusView);
-       
+       this.setTop(menuBar);
     }
     
     public void highlightTerrainOption() {

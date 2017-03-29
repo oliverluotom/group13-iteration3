@@ -6,6 +6,8 @@ import com.iteration3.view.GameWindow;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +29,7 @@ public class MapFileController {
         String fileLocation = "~/"; // TODO: default user home directory?
         String fileName = "boatsAndRoadsMap.txt";
         createHandlers();
+        setupFileChooser();
     }
 
     private void setupFileChooser(){
@@ -34,7 +37,7 @@ public class MapFileController {
         fileChooser.setTitle("Select A Map File");
         fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Text File", "*.txt"));
 
-        directoryPath = "~/";
+        directoryPath = "/";
         fileChooser.setInitialDirectory(new File(directoryPath));
 
         fileName = "RoadsAndBoatsMap.txt";
@@ -42,11 +45,10 @@ public class MapFileController {
     }
 
     public void saveMap(){
-        File saveLocation = fileChooser.showSaveDialog(gameWindow.getScene().getWindow());
-        fileManager = new MapFileManager(map, saveLocation.toString());
-
+        File saveLocation = fileChooser.showSaveDialog(new Stage());
         if(saveLocation == null)
             return;
+        fileManager = new MapFileManager(map, saveLocation.toString());
 
         try {
             fileManager.fillTextFileFromMap();
@@ -56,11 +58,10 @@ public class MapFileController {
     }
 
     public void loadMap(){
-        File fileLocation = fileChooser.showOpenDialog(gameWindow.getScene().getWindow());
-        fileManager = new MapFileManager(new Map(), fileLocation.toString());
-
+        File fileLocation = fileChooser.showOpenDialog(new Stage());
         if(fileLocation == null)
             return;
+        fileManager = new MapFileManager(new Map(), fileLocation.toString());
 
         try {
             fileManager.fillMapFromTextFile();
