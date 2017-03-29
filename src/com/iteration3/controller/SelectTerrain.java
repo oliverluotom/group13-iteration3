@@ -39,6 +39,10 @@ public class SelectTerrain implements StatusControllerState {
 		// TODO Auto-generated method stub
 		context.decrementTerrainIndex();
 		window.setTerrainType(context.getSelectedTerrainType());
+		
+		context.displayCurrentTerrain();
+		if(context.hasSelectedRiver()) context.displayCurrentRiver();
+		
 		if(context.isValidSubmission()) window.enableSubmit();
 		else window.disableSubmit();
 	}
@@ -48,6 +52,10 @@ public class SelectTerrain implements StatusControllerState {
 		// TODO Auto-generated method stub
 		context.incrementTerrainIndex();
 		window.setTerrainType(context.getSelectedTerrainType());
+		
+		context.displayCurrentTerrain();
+		if(context.hasSelectedRiver()) context.displayCurrentRiver();
+		
 		if(context.isValidSubmission()) window.enableSubmit();
 		else window.disableSubmit();
 	}

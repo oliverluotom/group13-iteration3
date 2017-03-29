@@ -48,6 +48,8 @@ public class GameWindow extends BorderPane {
         this.setCenter(mapView);
         this.setBottom(statusView);
        this.setTop(menuBar);
+       
+       this.setFocusTraversable(true);
     }
     
     public void highlightTerrainOption() {
@@ -148,4 +150,8 @@ public class GameWindow extends BorderPane {
 		exportMapFileItem.setOnAction(handler);
 	} // TODO
 
+	public void drawPreviewImage(String imageUrl) {
+		statusView.drawPreviewImage(imageUrl);
+	}
+	
 }

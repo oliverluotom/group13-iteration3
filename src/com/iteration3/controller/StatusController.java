@@ -17,10 +17,11 @@ import com.iteration3.model.GameModel;
 import com.iteration3.model.map.Location;
 import com.iteration3.model.map.Map;
 import com.iteration3.model.tile.*;
+import com.iteration3.utilities.Visitor;
 import com.iteration3.view.GameWindow;
 import com.iteration3.view.Observer;
 
-public class StatusController implements Observer {
+public class StatusController implements Observer, Visitor {
     
 	GameModel model; 
 	GameWindow window;
@@ -56,7 +57,7 @@ public class StatusController implements Observer {
         selectedTerrainIndex = 0;
         selectedRiverIndex = 0;
         cursorLocation = window.getCursorLocation();
-        
+      
         window.setTerrainType(terrainTypes.get(selectedTerrainIndex));
         window.setRiverType(riverTypes.get(selectedRiverIndex));
         window.setRotateOption("Must Select River to Rotate with Arrow Keys");
@@ -165,6 +166,107 @@ public class StatusController implements Observer {
     	return terrainMap.get(terrainTypes.get(selectedTerrainIndex));
     }
     
+    public void displayCurrentTerrain() {
+    	terrainMap.get(terrainTypes.get(selectedTerrainIndex)).acceptVisitor(this);
+    }
+    
+    public void displayCurrentRiver() {
+    	ArrayList<Integer> edges = getCurrentRiverEdges();
+    	displayRiverEdges(edges);
+    	
+    }
+    
+    public void displayRiverEdges(ArrayList<Integer> riverEdges) {
+    	
+    	 // handle river sources
+        if(riverEdges.size() == 1) {
+            if(riverEdges.contains(1)) {
+                window.drawPreviewImage("source1");
+            }
+            else if(riverEdges.contains(2)) {
+                window.drawPreviewImage("source2");
+            }
+            else if(riverEdges.contains(3)) {
+                window.drawPreviewImage("source3");
+            }
+            else if(riverEdges.contains(4)) {
+                window.drawPreviewImage("source4");
+            }
+            else if(riverEdges.contains(5)) {
+                window.drawPreviewImage("source5");
+            }
+            else if(riverEdges.contains(6)) {
+                window.drawPreviewImage("source6");
+            }
+        }
+        else if(riverEdges.size() == 2) {
+        // handle adjacent rivers
+            if(riverEdges.contains(1) && riverEdges.contains(2)) {
+                window.drawPreviewImage("adj1");
+            }
+            else if(riverEdges.contains(2) && riverEdges.contains(3)) {
+                window.drawPreviewImage("adj2");
+            }
+            else if(riverEdges.contains(3) && riverEdges.contains(4)) {
+                window.drawPreviewImage("adj3");
+            }
+            else if(riverEdges.contains(4) && riverEdges.contains(5)) {
+                window.drawPreviewImage("adj4");
+            }
+            else if(riverEdges.contains(5) && riverEdges.contains(6)) {
+                window.drawPreviewImage("adj5");
+            }
+            else if(riverEdges.contains(6) && riverEdges.contains(1)) {
+                window.drawPreviewImage("adj6");
+            }
+            // handle angled
+            else if(riverEdges.contains(1) && riverEdges.contains(3)) {
+                window.drawPreviewImage("angled1");
+            }
+            else if(riverEdges.contains(2) && riverEdges.contains(4)) {
+                window.drawPreviewImage("angled2");
+            }
+            else if(riverEdges.contains(3) && riverEdges.contains(5)) {
+                window.drawPreviewImage("angled3");
+            }
+            else if(riverEdges.contains(4) && riverEdges.contains(6)) {
+                window.drawPreviewImage("angled4");
+            }
+            else if(riverEdges.contains(5) && riverEdges.contains(1)) {
+                window.drawPreviewImage("angled5");
+            }
+            else if(riverEdges.contains(6) && riverEdges.contains(2)) {
+                window.drawPreviewImage("angled6");
+            }
+            // handle straight
+            else if(riverEdges.contains(1) && riverEdges.contains(4)) {
+                window.drawPreviewImage("straight1");
+            }
+            else if(riverEdges.contains(2) && riverEdges.contains(5)) {
+                window.drawPreviewImage("straight2");
+            }
+            else if(riverEdges.contains(3) && riverEdges.contains(6)) {
+                window.drawPreviewImage("straight3");
+            }
+
+        }
+        // handle triple rivers
+        else if(riverEdges.size() == 3) {
+            if(riverEdges.contains(1)) {
+                window.drawPreviewImage("tri1");
+            }
+            else {
+                window.drawPreviewImage("tri2");
+            }
+        }
+
+    }
+
+
+
+
+    
+    
     public void setCurrentlySelectedRiverEdges(ArrayList<Integer> edges) {
     	riverMap.put(getSelectedRiverType(), edges);
     }
@@ -260,7 +362,7 @@ public class StatusController implements Observer {
     	riverMap.put("Linear River",new ArrayList<Integer>(Arrays.asList(1,4)));
     	
     	riverTypes.add("Tri River");
-    	riverMap.put("Adjacent Edge River",new ArrayList<Integer>(Arrays.asList(1,3,5)));
+    	riverMap.put("Tri River",new ArrayList<Integer>(Arrays.asList(1,3,5)));
     	
     	
     }
@@ -310,5 +412,41 @@ public class StatusController implements Observer {
 		cursorLocation = window.getCursorLocation();
 		if(isValidSubmission()) window.enableSubmit();
 		else window.disableSubmit();
+	}
+
+	@Override
+	public void visit(WoodsTerrain terrain) {
+		// TODO Auto-generated method stub
+		window.drawPreviewImage("woods");
+	}
+
+	@Override
+	public void visit(MountainTerrain terrain) {
+		// TODO Auto-generated method stub
+		window.drawPreviewImage("mountains");
+	}
+
+	@Override
+	public void visit(DesertTerrain terrain) {
+		// TODO Auto-generated method stub
+		window.drawPreviewImage("desert");
+	}
+
+	@Override
+	public void visit(PastureTerrain terrain) {
+		// TODO Auto-generated method stub
+		window.drawPreviewImage("pasture");
+	}
+
+	@Override
+	public void visit(RockTerrain terrain) {
+		// TODO Auto-generated method stub
+		window.drawPreviewImage("rock");
+	}
+
+	@Override
+	public void visit(SeaTerrain terrain) {
+		// TODO Auto-generated method stub
+		window.drawPreviewImage("sea");
 	}
 }

@@ -40,6 +40,10 @@ public class SelectRiver implements StatusControllerState {
 		// TODO Auto-generated method stub
 		context.decrementRiverIndex();
 		window.setRiverType(context.getSelectedRiverType());
+		
+		context.displayCurrentTerrain();
+		if(context.hasSelectedRiver()) context.displayCurrentRiver();
+		
 		if(context.isValidSubmission()) window.enableSubmit();
 		else window.disableSubmit();
 	}
@@ -49,6 +53,10 @@ public class SelectRiver implements StatusControllerState {
 		// TODO Auto-generated method stub
 		context.incrementRiverIndex();
 		window.setRiverType(context.getSelectedRiverType());
+		
+		context.displayCurrentTerrain();
+		if(context.hasSelectedRiver()) context.displayCurrentRiver();
+		
 		if(context.isValidSubmission()) window.enableSubmit();
 		else window.disableSubmit();
 	}
