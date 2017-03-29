@@ -47,7 +47,7 @@ public class GameWindow extends BorderPane {
 		this.setTop(menuBar);
         this.setCenter(mapView);
         this.setBottom(statusView);
-       
+       this.setTop(menuBar);
     }
     
     public void highlightTerrainOption() {
