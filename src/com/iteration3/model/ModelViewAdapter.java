@@ -6,6 +6,7 @@ import com.iteration3.view.GameWindow;
 public class ModelViewAdapter {
     private GameModel gameModel;
     private GameWindow gameWindow;
+    private Map map;
 
     public ModelViewAdapter(GameModel gm, GameWindow gw){
         gameModel = gm;
@@ -13,10 +14,12 @@ public class ModelViewAdapter {
     }
 
     public void update(){
-        Map map = gameModel.getMap();
+        this.map = gameModel.getMap();
+        gameWindow.update();
         //TODO: Get Terrains
     }
 
-
-
+    public Map getMap() {
+        return map;
+    }
 }
