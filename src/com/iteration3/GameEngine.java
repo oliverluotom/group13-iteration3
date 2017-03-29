@@ -1,5 +1,6 @@
 package com.iteration3;
 
+import com.iteration3.controller.ControlDispatch;
 import com.iteration3.model.GameModel;
 import com.iteration3.model.ModelViewAdapter;
 import com.iteration3.view.GameWindow;
@@ -18,6 +19,7 @@ public class GameEngine extends Application{
         gameWindow = new GameWindow(1221,726);
         gameModel = new GameModel();
         MVA = new ModelViewAdapter(gameModel, gameWindow);
+        ControlDispatch cd = new ControlDispatch(gameModel, gameWindow);
 
 
         new AnimationTimer() {
