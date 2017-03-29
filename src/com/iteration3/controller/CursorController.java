@@ -22,66 +22,82 @@ public class CursorController implements Observable {
     HashMap<KeyCode,Action> keyMap;
     ArrayList<Observer> observers;
     GameWindow window;
-    Location location;
 
     public CursorController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keymap){
        
         this.keyMap = keymap;
         this.window = window;
+
         location = new Location(0,0,0);
         observers = new ArrayList<>();
+
         initializeKeyMap();
     }
 
+    //load keymap with controls
+    //could be adjusted to read from a file for custom controls
     private void initializeKeyMap(){
         keyMap.put(KeyCode.NUMPAD1, new Action(){
             public void execute(){
                 window.moveCursorSW();
+
                 location.getSouthWest();
                 notifyAllObservers();
+
             }
         });
 
         keyMap.put(KeyCode.NUMPAD7, new Action(){
             public void execute(){
                 window.moveCursorNW();
+
                 location.getNorthWest();
                 notifyAllObservers();
+
             }
         });
 
         keyMap.put(KeyCode.NUMPAD8, new Action(){
             public void execute(){
                 window.moveCursorNorth();
+
                 location.getNorth();
                 notifyAllObservers();
+
             }
         });
 
         keyMap.put(KeyCode.NUMPAD9, new Action(){
             public void execute(){
                 window.moveCursorNE();
+
                 location.getNorthEast();
                 notifyAllObservers();
+
             }
         });
 
         keyMap.put(KeyCode.NUMPAD3, new Action(){
             public void execute(){
                 window.moveCursorSE();
+
                 location.getSouthEast();
                 notifyAllObservers();
+
             }
         });
 
         keyMap.put(KeyCode.NUMPAD2, new Action(){
             public void execute(){
                 window.moveCursorSouth();
+
                 location.getSouth();
                 notifyAllObservers();
+
             }
         });
     }
+
 
     public Location getCursorLocation(){
         return location;
@@ -112,4 +128,6 @@ public class CursorController implements Observable {
 			obs.update();
 		}
 	}
+
+
 }

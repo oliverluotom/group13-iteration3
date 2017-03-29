@@ -34,6 +34,7 @@ public class MapEditorControlState implements ControlDispatchState{
         
     }
 
+    //execute action if it is a valid key for this state
     public void handleInput(KeyEvent event) {
         if (keyMap.containsKey(event.getCode()))
             keyMap.get(event.getCode()).execute();
