@@ -45,6 +45,9 @@ public class MapFileController {
         File saveLocation = fileChooser.showSaveDialog(gameWindow.getScene().getWindow());
         fileManager = new MapFileManager(map, saveLocation.toString());
 
+        if(saveLocation == null)
+            return;
+
         try {
             fileManager.fillTextFileFromMap();
         } catch(IOException e){
@@ -55,6 +58,9 @@ public class MapFileController {
     public void loadMap(){
         File fileLocation = fileChooser.showOpenDialog(gameWindow.getScene().getWindow());
         fileManager = new MapFileManager(new Map(), fileLocation.toString());
+
+        if(fileLocation == null)
+            return;
 
         try {
             fileManager.fillMapFromTextFile();
