@@ -41,7 +41,10 @@ public class MapFileController {
         fileChooser.setInitialFileName(fileName);
     }
 
-    public void saveMap(String directory, String name){
+    public void saveMap(){
+        File saveLocation = fileChooser.showSaveDialog(gameWindow.getScene().getWindow());
+        fileManager = new MapFileManager(map, saveLocation.toString());
+
         try {
             fileManager.fillTextFileFromMap();
         } catch(IOException e){
@@ -49,7 +52,10 @@ public class MapFileController {
         }
     }
 
-    public void loadMap(String directory, String name){
+    public void loadMap(){
+        File fileLocation = fileChooser.showOpenDialog(gameWindow.getScene().getWindow());
+        fileManager = new MapFileManager(new Map(), fileLocation.toString());
+
         try {
             fileManager.fillMapFromTextFile();
         } catch(IOException e){
@@ -62,14 +68,14 @@ public class MapFileController {
             @Override
             public void handle(ActionEvent e){
 
-                loadMap(directoryPath, fileName);
+                loadMap();
             }
         };
 
        mapFileExporter = new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent e){
-                saveMap(directoryPath, fileName);
+                saveMap();
             }
         };
 
