@@ -64,4 +64,13 @@ public class GameModel {
         fileManager.fillTextFileFromMap();
     }
 
+    public boolean isValidPlacement(Location location, Terrain terrain, ArrayList<Integer> riverEdges) {
+        
+    	return map.isValidPlacement(location, terrain, riverEdges);
+    }
+    
+public boolean isValidPlacement(Location location, Terrain terrain) {
+        
+    	return map.isValidPlacement(location, terrain);
+    }
 }

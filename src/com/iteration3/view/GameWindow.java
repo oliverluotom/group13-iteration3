@@ -44,6 +44,7 @@ public class GameWindow extends BorderPane {
         this.menuBar.getMenus().add(fileMenu);
 
         //TODO: Add Status View to the addAll() call below
+		this.setTop(menuBar);
         this.setCenter(mapView);
         this.setBottom(statusView);
        
@@ -97,8 +98,12 @@ public class GameWindow extends BorderPane {
 		this.setOnKeyPressed(handler);
 	}
 
+	public void drawRiver(String imageURL, int x, int y) {
+    	mapView.drawRiver(imageURL, x, y);
+	}
+
 	public void drawTile(String imageURL, int x, int y) {
-    	mapView.drawTile(imageURL, x, y);
+		mapView.drawTile(imageURL, x, y);
 	}
 
 	public void update(){
@@ -128,10 +133,19 @@ public class GameWindow extends BorderPane {
 		return mapView.getCursorLocation();
 	}
 
+	public void disableSubmit() {
+		statusView.invalidateSubmit();
+	}
+	
+	public void enableSubmit() {
+		statusView.validateSumbit();
+	}
+
 	public void setOnClickImport(EventHandler<ActionEvent> handler){
 		importMapFileItem.setOnAction(handler);
 	} // TODO
 	public void setOnClickExport(EventHandler<ActionEvent> handler){
 		exportMapFileItem.setOnAction(handler);
 	} // TODO
+
 }

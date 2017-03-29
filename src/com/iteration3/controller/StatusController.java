@@ -55,7 +55,7 @@ public class StatusController {
         
         window.setTerrainType(terrainTypes.get(selectedTerrainIndex));
         window.setRiverType(riverTypes.get(selectedRiverIndex));
-        window.setRotateOption("Rotate Tile with Arrow Keys");
+        window.setRotateOption("Must Select River to Rotate with Arrow Keys");
         
         selectTerrain = new SelectTerrain(this,window);
         selectRiver = new SelectRiver(this,window);
@@ -157,6 +157,10 @@ public class StatusController {
     	return riverTypes.get(selectedRiverIndex);
     }
     
+    public Terrain getSlectedTerrain() {
+    	return terrainMap.get(terrainTypes.get(selectedTerrainIndex));
+    }
+    
     public void setCurrentlySelectedRiverEdges(ArrayList<Integer> edges) {
     	riverMap.put(getSelectedRiverType(), edges);
     }
@@ -241,6 +245,26 @@ public class StatusController {
     	
     }
     
+    public boolean isvalidSubmission() {
+    	if(hasSelectedRiver()) {
+			if(model.isValidPlacement(window.getCursorLocation(),getSlectedTerrain(), getCurrentRiverEdges())) {
+				return true;
+			} 
+			else {
+				return false;
+			}
+		}
+		else {
+			if(model.isValidPlacement(window.getCursorLocation(),getSlectedTerrain())) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+    	
+    }
+    
     public void setOnClickSubmit() {
     	
     	EventHandler<ActionEvent> onSumbit = new EventHandler<ActionEvent> () {
@@ -248,6 +272,7 @@ public class StatusController {
 			public void handle(ActionEvent event) {
 				
 				if(hasSelectedRiver()) {
+					
 					model.addRiverFromGUI(window.getCursorLocation(), riverMap.get(riverTypes.get(selectedRiverIndex)));
 				}
 				

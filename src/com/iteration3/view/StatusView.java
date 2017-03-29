@@ -186,5 +186,13 @@ public class StatusView extends VBox {
 	public void addKeyHandler(EventHandler <KeyEvent> handler) {
 		this.setOnKeyPressed(handler);
 	}
+	
+	public void invalidateSubmit() {
+		submitButton.setDisable(true);
+	}
+	
+	public void validateSumbit() {
+		submitButton.setDisable(false);
+	}
 }
 

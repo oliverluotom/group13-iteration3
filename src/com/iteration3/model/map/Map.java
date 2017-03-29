@@ -312,5 +312,10 @@ public class Map {
         return( validateLocationRange(location) && validateRiverLocation(location, new River(riverEdges)) && validateTileAdjacency(location) && validateTileLocation(location, new Tile(terrain)));
 
     }
+    
+    public boolean isValidPlacement(Location location, Terrain terrain) {
+        return( validateLocationRange(location) && validateTileAdjacency(location) && validateTileLocation(location, new Tile(terrain)));
+
+    }
 
 }
