@@ -9,21 +9,27 @@ import com.iteration3.model.GameModel;
 import com.iteration3.model.map.Location;
 import com.iteration3.model.map.Map;
 import com.iteration3.view.GameWindow;
+import com.iteration3.view.Observable;
+import com.iteration3.view.Observer;
+
 import javafx.scene.input.KeyCode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CursorController {
-    Map map;
+public class CursorController implements Observable {
+ 
     HashMap<KeyCode,Action> keyMap;
+    ArrayList<Observer> observers;
     GameWindow window;
     Location location;
 
     public CursorController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keymap){
-        this.map = map;
+       
         this.keyMap = keymap;
         this.window = window;
         location = new Location(0,0,0);
+        observers = new ArrayList<>();
         initializeKeyMap();
     }
 
@@ -32,6 +38,7 @@ public class CursorController {
             public void execute(){
                 window.moveCursorSW();
                 location.getSouthWest();
+                notifyAllObservers();
             }
         });
 
@@ -39,6 +46,7 @@ public class CursorController {
             public void execute(){
                 window.moveCursorNW();
                 location.getNorthWest();
+                notifyAllObservers();
             }
         });
 
@@ -46,6 +54,7 @@ public class CursorController {
             public void execute(){
                 window.moveCursorNorth();
                 location.getNorth();
+                notifyAllObservers();
             }
         });
 
@@ -53,6 +62,7 @@ public class CursorController {
             public void execute(){
                 window.moveCursorNE();
                 location.getNorthEast();
+                notifyAllObservers();
             }
         });
 
@@ -60,6 +70,7 @@ public class CursorController {
             public void execute(){
                 window.moveCursorSE();
                 location.getSouthEast();
+                notifyAllObservers();
             }
         });
 
@@ -67,6 +78,7 @@ public class CursorController {
             public void execute(){
                 window.moveCursorSouth();
                 location.getSouth();
+                notifyAllObservers();
             }
         });
     }
@@ -74,4 +86,30 @@ public class CursorController {
     public Location getCursorLocation(){
         return location;
     }
+
+	@Override
+	public void addObserver(Observer obs) {
+		// TODO Auto-generated method stub
+		observers.add(obs);
+	}
+
+	@Override
+	public void removeObserver(Observer obs) {
+		// TODO Auto-generated method stub
+		observers.remove(obs);
+	}
+
+	@Override
+	public void notifyObserver(Observer obs) {
+		// TODO Auto-generated method stub
+		obs.update();
+	}
+
+	@Override
+	public void notifyAllObservers() {
+		// TODO Auto-generated method stub
+		for(Observer obs: observers) {
+			obs.update();
+		}
+	}
 }

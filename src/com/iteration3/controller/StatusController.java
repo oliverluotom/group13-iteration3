@@ -14,11 +14,13 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 
 import com.iteration3.model.GameModel;
+import com.iteration3.model.map.Location;
 import com.iteration3.model.map.Map;
 import com.iteration3.model.tile.*;
 import com.iteration3.view.GameWindow;
+import com.iteration3.view.Observer;
 
-public class StatusController {
+public class StatusController implements Observer {
     
 	GameModel model; 
 	GameWindow window;
@@ -30,7 +32,8 @@ public class StatusController {
     
     int selectedTerrainIndex;
     int selectedRiverIndex;
-   
+    Location cursorLocation;
+    
     StatusControllerState currentState;
     StatusControllerState selectTerrain;
     StatusControllerState selectRiver;
@@ -52,6 +55,7 @@ public class StatusController {
         
         selectedTerrainIndex = 0;
         selectedRiverIndex = 0;
+        cursorLocation = window.getCursorLocation();
         
         window.setTerrainType(terrainTypes.get(selectedTerrainIndex));
         window.setRiverType(riverTypes.get(selectedRiverIndex));
@@ -195,10 +199,26 @@ public class StatusController {
     		
     	};
     	
+    	Action enterAction = new Action() {
+    		public void execute() {
+				if(isValidSubmission()) {
+		   			if(hasSelectedRiver()) {
+						
+						model.addRiverFromGUI(cursorLocation, riverMap.get(riverTypes.get(selectedRiverIndex)));
+					}
+					
+					model.addTileFromGUI(cursorLocation, terrainMap.get(terrainTypes.get(selectedTerrainIndex)));
+				
+	    		}
+			}
+    			
+    	};
+    	
     	keyMap.put(KeyCode.UP, upAction);
     	keyMap.put(KeyCode.DOWN, downAction);
     	keyMap.put(KeyCode.LEFT, leftAction);
     	keyMap.put(KeyCode.RIGHT, rightAction);
+    	keyMap.put(KeyCode.ENTER, enterAction);
     }
     
     private void intializeTerrainOptions() {
@@ -245,9 +265,9 @@ public class StatusController {
     	
     }
     
-    public boolean isvalidSubmission() {
+    public boolean isValidSubmission() {
     	if(hasSelectedRiver()) {
-			if(model.isValidPlacement(window.getCursorLocation(),getSlectedTerrain(), getCurrentRiverEdges())) {
+			if(model.isValidPlacement(cursorLocation,getSlectedTerrain(), getCurrentRiverEdges())) {
 				return true;
 			} 
 			else {
@@ -255,7 +275,7 @@ public class StatusController {
 			}
 		}
 		else {
-			if(model.isValidPlacement(window.getCursorLocation(),getSlectedTerrain())) {
+			if(model.isValidPlacement(cursorLocation,getSlectedTerrain())) {
 				return true;
 			}
 			else {
@@ -273,14 +293,22 @@ public class StatusController {
 				
 				if(hasSelectedRiver()) {
 					
-					model.addRiverFromGUI(window.getCursorLocation(), riverMap.get(riverTypes.get(selectedRiverIndex)));
+					model.addRiverFromGUI(cursorLocation, riverMap.get(riverTypes.get(selectedRiverIndex)));
 				}
 				
-				model.addTileFromGUI(window.getCursorLocation(), terrainMap.get(terrainTypes.get(selectedTerrainIndex)));
+				model.addTileFromGUI(cursorLocation, terrainMap.get(terrainTypes.get(selectedTerrainIndex)));
 			}
     		
     	};
     	
     	window.setOnClickSubmit(onSumbit);
     }
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		cursorLocation = window.getCursorLocation();
+		if(isValidSubmission()) window.enableSubmit();
+		else window.disableSubmit();
+	}
 }
