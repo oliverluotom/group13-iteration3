@@ -6,10 +6,10 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 
 /*--------------------------------------------------------------------------------------
-|    ${NAME} Module: Created by ${USER} on ${DATE}.
+|    ControlDispatch: Created by Clay&Ricardo on 3/27/17.
 |---------------------------------------------------------------------------------------
-|   Description:
-|
+|   Entry-point for all controls
+|   Events are sent to the current control state for handling
 ---------------------------------------------------------------------------------------*/
 public class ControlDispatch implements EventHandler<KeyEvent>{
 
