@@ -16,7 +16,7 @@ public class GameModel {
 
     public GameModel(){
         this.map = new Map();
-        this.fileManager = new MapFileManager(this.map, "src/com/iteration3/model/map/mapFileReadValid.txt");
+        //this.fileManager = new MapFileManager(this.map, "src/com/iteration3/model/map/mapFileReadValid.txt");
     }
 
     public Map getMap(){

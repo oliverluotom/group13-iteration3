@@ -19,6 +19,7 @@ public class GameEngine extends Application{
         gameWindow = new GameWindow(1221,726);
         gameModel = new GameModel();
         MVA = new ModelViewAdapter(gameModel, gameWindow);
+
         ControlDispatch controller = new ControlDispatch(gameModel,gameWindow);
 
 
