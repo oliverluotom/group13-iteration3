@@ -14,6 +14,7 @@ public class ModelViewAdapter implements Visitor {
     private GameWindow gameWindow;
     private Location currentLocation;
 
+
     public ModelViewAdapter(GameModel gm, GameWindow gw){
         gameModel = gm;
         gameWindow = gw;
@@ -22,8 +23,6 @@ public class ModelViewAdapter implements Visitor {
     public void update(){
         Map map = gameModel.getMap();
         drawTiles(map);
-
-
     }
 
 
@@ -75,6 +74,5 @@ public class ModelViewAdapter implements Visitor {
     @Override
     public void visit(SeaTerrain terrain) {
         gameWindow.drawTile("sea", currentLocation.getX(), currentLocation.getZ());
-
     }
 }
