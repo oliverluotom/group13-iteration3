@@ -13,7 +13,7 @@ public class StatusCyclingTest extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		
 		GameModel model = new GameModel();
-		GameWindow window = new GameWindow(800,800);
+		GameWindow window = new GameWindow(1221,1000);
 		ControlDispatch control = new ControlDispatch(model,window);
 		
 		 Scene scene = new Scene(window, 800, 800);
