@@ -78,4 +78,8 @@ public boolean isValidPlacement(Location location, Terrain terrain) {
         
     	return map.isValidPlacement(location, terrain);
     }
+
+	public void clearMap() {
+		map.clearMap();
+	}
 }

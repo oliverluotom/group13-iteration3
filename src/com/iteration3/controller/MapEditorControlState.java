@@ -54,6 +54,7 @@ public class MapEditorControlState implements ControlDispatchState{
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				window.clearMap();
+				model.clearMap();
 			}
     		
     	};
