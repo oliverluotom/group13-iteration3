@@ -44,6 +44,7 @@ public class GameWindow extends BorderPane {
         this.menuBar.getMenus().add(fileMenu);
 
         //TODO: Add Status View to the addAll() call below
+		this.setTop(menuBar);
         this.setCenter(mapView);
         this.setBottom(statusView);
        
