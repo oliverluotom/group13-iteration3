@@ -26,6 +26,7 @@ public class MapFileController {
     MapFileController(GameModel model, GameWindow window){
         gameModel = model;
         gameWindow = window;
+        map = model.getMap();
         String fileLocation = "~/"; // TODO: default user home directory?
         String fileName = "boatsAndRoadsMap.txt";
         createHandlers();
@@ -34,7 +35,6 @@ public class MapFileController {
 
     private void setupFileChooser(){
         fileChooser = new FileChooser();
-        fileChooser.setTitle("Select A Map File");
         fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Text File", "*.txt"));
 
         directoryPath = "/";
@@ -45,6 +45,7 @@ public class MapFileController {
     }
 
     public void saveMap(){
+        fileChooser.setTitle("Select A File to Save To");
         File saveLocation = fileChooser.showSaveDialog(new Stage());
         if(saveLocation == null)
             return;
@@ -58,6 +59,7 @@ public class MapFileController {
     }
 
     public void loadMap(){
+        fileChooser.setTitle("Select A Map File To Load");
         File fileLocation = fileChooser.showOpenDialog(new Stage());
         if(fileLocation == null)
             return;
