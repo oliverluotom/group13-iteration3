@@ -37,6 +37,10 @@ public class RotateState implements StatusControllerState {
 			ArrayList<Integer> edges = context.getCurrentRiverEdges();
 			edges = context.rotateEdgesCounterClockWise(edges);
 			context.setCurrentlySelectedRiverEdges(edges);
+			
+			context.displayCurrentTerrain();
+			if(context.hasSelectedRiver()) context.displayCurrentRiver();
+			
 			if(context.isValidSubmission()) window.enableSubmit();
 			else window.disableSubmit();
 		}
@@ -50,6 +54,10 @@ public class RotateState implements StatusControllerState {
 			ArrayList<Integer> edges = context.getCurrentRiverEdges();
 			edges = context.rotateEdgesClockWise(edges);
 			context.setCurrentlySelectedRiverEdges(edges);
+			
+			context.displayCurrentTerrain();
+			if(context.hasSelectedRiver()) context.displayCurrentRiver();
+			
 			if(context.isValidSubmission()) window.enableSubmit();
 			else window.disableSubmit();
 		}
