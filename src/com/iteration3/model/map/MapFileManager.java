@@ -21,7 +21,7 @@ public class MapFileManager {
 
     // Reads file line by line, extracts info and creates a map out of it
     public void fillMapFromTextFile() throws IOException{
-
+            map.clearMap();
             BufferedReader br = new BufferedReader(new FileReader(this.pathToTextFile));
             String line;
             // divide line and create Tile/Rivers
@@ -80,8 +80,7 @@ public class MapFileManager {
             // check that all rivers connect correctly
             if(!map.validateAllRiverLocations()) {
                 System.out.println("Invalid river setup, check text file.");
-                map.clearRivers();
-                map.clearTiles();
+                map.clearMap();
             }
 
 

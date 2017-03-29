@@ -13,10 +13,15 @@ import java.util.ArrayList;
 public class GameModel {
     private Map map;
     private MapFileManager fileManager;
+    private String path;
 
     public GameModel(){
         this.map = new Map();
-        //this.fileManager = new MapFileManager(this.map, "src/com/iteration3/model/map/mapFileReadValid.txt");
+    }
+
+    public void setPath(String path){
+        this.path=path;
+        this.fileManager = new MapFileManager(this.map, path);
     }
 
     public Map getMap(){

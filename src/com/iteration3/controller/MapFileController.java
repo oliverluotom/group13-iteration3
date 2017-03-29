@@ -14,7 +14,6 @@ import java.io.IOException;
 
 public class MapFileController {
     private Map map;
-    private MapFileManager fileManager;
     private EventHandler<ActionEvent> mapFileImporter, mapFileExporter;
     private GameWindow gameWindow;
     private GameModel gameModel;
@@ -49,10 +48,9 @@ public class MapFileController {
         File saveLocation = fileChooser.showSaveDialog(new Stage());
         if(saveLocation == null)
             return;
-        fileManager = new MapFileManager(map, saveLocation.toString());
-
+        gameModel.setPath(saveLocation.toString());
         try {
-            fileManager.fillTextFileFromMap();
+            gameModel.fillTextFileFromMap();
         } catch(IOException e){
             System.out.println("Error saving map!");
         }
@@ -63,10 +61,9 @@ public class MapFileController {
         File fileLocation = fileChooser.showOpenDialog(new Stage());
         if(fileLocation == null)
             return;
-        fileManager = new MapFileManager(new Map(), fileLocation.toString());
-
+        gameModel.setPath(fileLocation.toString());
         try {
-            fileManager.fillMapFromTextFile();
+            gameModel.fillMapFromTextFile();
         } catch(IOException e){
             System.out.println("Error loading map!");
         }
