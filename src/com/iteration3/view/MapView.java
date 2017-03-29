@@ -19,9 +19,15 @@ public class MapView extends Pane{
     private final int MIN_MAP_X_BOUND = 350;
     private final int MIN_MAP_Y_BOUND = 100;
 
-    private Assets images;
+    private final int X_OFFSET = 11;
+    private final int X_PIXEL_OFFSET = 52;
+    private final int Y_OFFSET = 3;
+    private final int Y_PIXEL_OFFSET = 60;
+    private final int X_OFFSET2 = 30;
+
     private double cameraX = -200, cameraY = -200;
     private int cameraSpeed = 16;
+    private Assets images;
     private Canvas mapCanvas;
     private Location cursorLocation;
     private GraphicsContext gc;
@@ -59,47 +65,31 @@ public class MapView extends Pane{
                     }
                 });
         this.getChildren().add(getMapCanvas());
-        gc.setFill(Color.TRANSPARENT);
-        gc.fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
-        gc.setFill(Color.BLACK);
-        gc.fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
-        gc.setFill(Color.WHITE);
-
+        clearCanvas();
         drawCursor();
+        drawEmptyHexGrid();
+    }
 
+    private void drawEmptyHexGrid() {
         // Draw Empty Hex Grid
         int size = getMapSizeRadius();
         for(int x = -size; x <= size; x++){
             for(int y = -size; y <= size; y++){
                 if(x+y<=size && x+y>=-size) {
-                    gc.drawImage(images.getImage("empty"), (x + 11) * 52 + getCameraX(), (y + 3) * 60 + (30 * x) + getCameraY());
+                    gc.drawImage(images.getImage("empty"), (x + getXOffset()) * getXPixelOffset() + getCameraX(), (y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x) + getCameraY());
                 }
             }
         }
     }
 
     public void drawCursor(){
-        gc.drawImage(images.getImage("cursor"),(cursorLocation.getX()+11)*52 + getCameraX(), (cursorLocation.getZ()+3)*60 + (30 * cursorLocation.getX()) + getCameraY());
+        gc.drawImage(images.getImage("cursor"),(cursorLocation.getX()+getXOffset())*getXPixelOffset() + getCameraX(), (cursorLocation.getZ()+getYOffset())*getYPixelOffset() + (getXOffset2() * cursorLocation.getX()) + getCameraY());
     }
 
     public void update(){
-        gc.setFill(Color.TRANSPARENT);
-        gc.fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
-        gc.setFill(Color.BLACK);
-        gc.fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
-        gc.setFill(Color.WHITE);
-
-        int size = getMapSizeRadius();
-        for(int x = -size; x <= size; x++){
-            for(int y = -size; y <= size; y++){
-                if(x+y<=size && x+y>=-size) {
-                    gc.drawImage(images.getImage("empty"), (x + 11) * 52 + getCameraX(), (y + 3) * 60 + (30 * x) + getCameraY());
-                }
-            }
-        }
-
+        clearCanvas();
+        drawEmptyHexGrid();
         drawCursor();
-
     }
 
     public Location getCursorLocation(){
@@ -213,6 +203,22 @@ public class MapView extends Pane{
         return MIN_MAP_Y_BOUND;
     }
 
+    public int getXOffset() {
+        return X_OFFSET;
+    }
+    public int getXOffset2() {
+        return X_OFFSET2;
+    }
+    public int getYOffset() {
+        return Y_OFFSET;
+    }
+    public int getXPixelOffset() {
+        return X_PIXEL_OFFSET;
+    }
+    public int getYPixelOffset() {
+        return Y_PIXEL_OFFSET;
+    }
+
     private boolean canMoveCameraRight(double mousePositionX) {
         if (mousePositionX > getMaxMapXBound()) {
             return true;
@@ -238,8 +244,20 @@ public class MapView extends Pane{
         return false;
     }
 
+    public GraphicsContext getGc() {
+        return gc;
+    }
+
+    private void clearCanvas() {
+        getGc().setFill(Color.TRANSPARENT);
+        getGc().fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
+        getGc().setFill(Color.BLACK);
+        getGc().fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
+        getGc().setFill(Color.WHITE);
+    }
+
     public void drawTile(String imageURL, int x, int y) {
-        gc.drawImage(images.getImage(imageURL), (x + 11) * 52 + getCameraX(), (y + 3) * 60 + (30 * x) + getCameraY());
+        getGc().drawImage(images.getImage(imageURL), (x + getXOffset()) * getXPixelOffset() + getCameraX(), (y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x) + getCameraY());
     }
 
     public void drawRiver(String imageURL, int x, int y) {
@@ -249,6 +267,5 @@ public class MapView extends Pane{
     public int getMapSizeRadius() {
         return mapSizeRadius;
     }
-
 
 }

@@ -1,5 +1,6 @@
 package com.iteration3.view;
 
+import com.iteration3.controller.MapFileController;
 import com.iteration3.model.map.Location;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,9 +11,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+
+import java.io.File;
 
 public class GameWindow extends BorderPane {
     private MenuBar menuBar;
+    private MenuItem importMapFileItem, exportMapFileItem;
     private MapView mapView;
     private StatusView statusView;
 
@@ -31,8 +36,8 @@ public class GameWindow extends BorderPane {
 
         Menu fileMenu = new Menu("File");
         MenuItem newMap = new MenuItem("Create New Map");
-        MenuItem importMapFileItem = new MenuItem("Import Map File...");
-        MenuItem exportMapFileItem = new MenuItem("Export Map File...");
+        importMapFileItem = new MenuItem("Import Map File...");
+        exportMapFileItem = new MenuItem("Export Map File...");
         fileMenu.getItems().add(newMap);
         fileMenu.getItems().add(importMapFileItem);
         fileMenu.getItems().add(exportMapFileItem);
@@ -126,6 +131,20 @@ public class GameWindow extends BorderPane {
 	public Location getCursorLocation(){
 		return mapView.getCursorLocation();
 	}
-	public void setOnClickImport(EventHandler<ActionEvent> handler){} // TODO
-	public void setOnClickExport(EventHandler<ActionEvent> handler){} // TODO
+
+	public void disableSubmit() {
+		statusView.invalidateSubmit();
+	}
+	
+	public void enableSubmit() {
+		statusView.validateSumbit();
+	}
+
+	public void setOnClickImport(EventHandler<ActionEvent> handler){
+		importMapFileItem.setOnAction(handler);
+	} // TODO
+	public void setOnClickExport(EventHandler<ActionEvent> handler){
+		exportMapFileItem.setOnAction(handler);
+	} // TODO
+
 }

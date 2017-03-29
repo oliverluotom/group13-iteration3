@@ -1,5 +1,6 @@
 package com.iteration3.controller;
 
+import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
 
 public class SelectTerrain implements StatusControllerState {
@@ -15,7 +16,14 @@ public class SelectTerrain implements StatusControllerState {
 	@Override
 	public void cycleUp() {
 		// TODO Auto-generated method stub
-		window.highlightRotateOption();
+		if(context.hasSelectedRiver()) {
+			window.highlightRotateOption();
+			window.setRotateOption("Rotate Tile with Arrow Keys");
+		}
+		else {
+			window.invalidateRiverOption();
+			window.setRiverType("Must Select River to Rotate with Arrow Keys");
+		}
 		context.setCurrentState(context.getRotateState());
 	}
 
@@ -31,6 +39,8 @@ public class SelectTerrain implements StatusControllerState {
 		// TODO Auto-generated method stub
 		context.decrementTerrainIndex();
 		window.setTerrainType(context.getSelectedTerrainType());
+		if(context.isvalidSubmission()) window.enableSubmit();
+		else window.disableSubmit();
 	}
 
 	@Override
@@ -38,6 +48,8 @@ public class SelectTerrain implements StatusControllerState {
 		// TODO Auto-generated method stub
 		context.incrementTerrainIndex();
 		window.setTerrainType(context.getSelectedTerrainType());
+		if(context.isvalidSubmission()) window.enableSubmit();
+		else window.disableSubmit();
 	}
 
 }
