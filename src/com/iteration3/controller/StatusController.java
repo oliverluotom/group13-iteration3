@@ -74,6 +74,7 @@ public class StatusController implements Observer, Visitor {
         
         mapControls();
         setOnClickSubmit();
+        displayCurrentTerrain();
     }
 
     public void cycleUP(){
