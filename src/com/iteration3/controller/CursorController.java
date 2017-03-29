@@ -5,6 +5,7 @@ package com.iteration3.controller;
 |   Controller to define functions for moving around the map to select a tile
 |   Cursor keeps track of its location on the map
 ---------------------------------------------------------------------------------------*/
+import com.iteration3.model.GameModel;
 import com.iteration3.model.map.Location;
 import com.iteration3.model.map.Map;
 import com.iteration3.view.GameWindow;
@@ -18,7 +19,7 @@ public class CursorController {
     GameWindow window;
     Location location;
 
-    public CursorController(Map map, GameWindow window, HashMap<KeyCode, Action> keymap){
+    public CursorController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keymap){
         this.map = map;
         this.keyMap = keymap;
         this.window = window;
