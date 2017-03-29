@@ -124,4 +124,12 @@ public class GameWindow extends BorderPane {
 	}
 	public void setOnClickImport(EventHandler<ActionEvent> handler){} // TODO
 	public void setOnClickExport(EventHandler<ActionEvent> handler){} // TODO
+	
+	public void disableSubmit() {
+		statusView.invalidateSubmit();
+	}
+	
+	public void enableSubmit() {
+		statusView.validateSumbit();
+	}
 }

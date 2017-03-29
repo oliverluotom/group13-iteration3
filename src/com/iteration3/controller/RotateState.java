@@ -2,6 +2,7 @@ package com.iteration3.controller;
 
 import java.util.ArrayList;
 
+import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
 
 public class RotateState implements StatusControllerState {
@@ -12,6 +13,7 @@ public class RotateState implements StatusControllerState {
 	public RotateState(StatusController context, GameWindow window) {
 		this.context = context;
 		this.window = window;
+		
 	}
 	
 	@Override
@@ -35,7 +37,10 @@ public class RotateState implements StatusControllerState {
 			ArrayList<Integer> edges = context.getCurrentRiverEdges();
 			edges = context.rotateEdgesCounterClockWise(edges);
 			context.setCurrentlySelectedRiverEdges(edges);
+			if(context.isvalidSubmission()) window.enableSubmit();
+			else window.disableSubmit();
 		}
+		
 	}
 
 	@Override
@@ -45,6 +50,8 @@ public class RotateState implements StatusControllerState {
 			ArrayList<Integer> edges = context.getCurrentRiverEdges();
 			edges = context.rotateEdgesClockWise(edges);
 			context.setCurrentlySelectedRiverEdges(edges);
+			if(context.isvalidSubmission()) window.enableSubmit();
+			else window.disableSubmit();
 		}
 	}
 
