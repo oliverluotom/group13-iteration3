@@ -242,8 +242,13 @@ public class MapView extends Pane{
         gc.drawImage(images.getImage(imageURL), (x + 11) * 52 + getCameraX(), (y + 3) * 60 + (30 * x) + getCameraY());
     }
 
+    public void drawRiver(String imageURL, int x, int y) {
+        gc.drawImage(images.getImage(imageURL), (x + 11) * 52 + getCameraX(), (y + 3) * 60 + (30 * x) + getCameraY());
+    }
+
     public int getMapSizeRadius() {
         return mapSizeRadius;
     }
+
 
 }
