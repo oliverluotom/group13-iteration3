@@ -1,5 +1,10 @@
 package com.iteration3.controller;
-
+/*--------------------------------------------------------------------------------------
+|    MapEditorControlState: Created by Clay on 3/27/17.
+|---------------------------------------------------------------------------------------
+|   State class dedicated to control mode when building a map
+|   Composed of CursorController and StatusController
+---------------------------------------------------------------------------------------*/
 import com.iteration3.model.map.Map;
 import com.iteration3.view.GameWindow;
 import javafx.scene.input.KeyCode;
