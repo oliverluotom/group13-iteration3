@@ -1,9 +1,18 @@
-package com.iteration3.controller;
-/*--------------------------------------------------------------------------------------
-|    Action: Created by Clay on 3/27/17.
-|---------------------------------------------------------------------------------------
-|   Controller for importing and exporting map files
-|   Control scheme defined for mouse clicks on certain buttons
----------------------------------------------------------------------------------------*/
+package iteration3.controller;
+
+import com.iteration3.model.map.*;
+
 public class MapFileController {
+    Map map;
+    String fileLocation;
+    String fileName;
+    MapFileManager fileManager;
+
+    MapFileController(Map map){
+        this.map = map;
+    }
+
+    saveMap(String directory, String name){
+
+    }
 }
