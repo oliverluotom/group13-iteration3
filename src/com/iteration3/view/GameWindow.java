@@ -91,4 +91,8 @@ public class GameWindow extends BorderPane {
 	public void update() {
 		mapView.draw();
 	}
+
+	public void setOnClickImport(EventHandler<ActionEvent> handler){} // TODO
+	public void setOnClickExport(EventHandler<ActionEvent> handler){} // TODO
+
 }

@@ -9,17 +9,17 @@ import javafx.scene.paint.Color;
 
 public class MapView extends Pane{
     private final int MAX_CAMERA_X_BOUND = 660;
-    private final int MIN_CAMERA_X_BOUND = -1500;
-    private final int MAX_CAMERA_Y_BOUND = 1330;
-    private final int MIN_CAMERA_Y_BOUND = 370;
+    private final int MIN_CAMERA_X_BOUND = -660;
+    private final int MAX_CAMERA_Y_BOUND = 660;
+    private final int MIN_CAMERA_Y_BOUND = -660;
 
     private int MAX_MAP_X_BOUND = 850;
-    private int MAX_MAP_Y_BOUND = 500;
+    private int MAX_MAP_Y_BOUND = 300;
     private int MIN_MAP_X_BOUND = 350;
     private int MIN_MAP_Y_BOUND = 100;
 
     private Assets images;
-    private double cameraX = 0, cameraY = 0;
+    private double cameraX = -200, cameraY = 200;
     private int cameraSpeed = 16;
     private Canvas mapCanvas;
 
@@ -37,10 +37,10 @@ public class MapView extends Pane{
 
     private void initializePane() {
 
-        this.mapCanvas = new Canvas(this.getWidth(),this.getHeight());
+        this.mapCanvas = new Canvas(this.getWidth(), this.getHeight());
         this.mapCanvas.addEventFilter(MouseEvent.MOUSE_MOVED,
                 event -> {
-                    System.out.println(event.getSceneX());
+                    //System.out.println(event.getSceneY());
                     if (canMoveCameraRight(event.getSceneX())) {
                         moveCameraRight();
                     }
@@ -57,29 +57,12 @@ public class MapView extends Pane{
         this.getChildren().add(getMapCanvas());
         GraphicsContext gc = getMapCanvas().getGraphicsContext2D(); // Clears whatever is currently on the canvas
         gc.setFill(Color.TRANSPARENT);
-        gc.fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
+        gc.fillRect(0, 0, getMapCanvas().getWidth(), getMapCanvas().getHeight());
         gc.setFill(Color.BLACK);
-        gc.fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
+        gc.fillRect(0, 0, getMapCanvas().getWidth(), getMapCanvas().getHeight());
         gc.setFill(Color.WHITE);
-
-        //gc.drawImage(images.getImage("desert"), 200, 200);
-
-
-        int numTiles = 21;
-        for(int x = 0; x <= 11; x++){
-            for(int y = 0; y <= numTiles; y++){
-                if(x%2!=0){
-                    gc.drawImage(images.getImage("desert"), (x) * 52 + getCameraX(), (y) * 60 + 30 * x + getCameraY());
-                    gc.drawImage(images.getImage("desert"), (-x) * 52 + getCameraX(), (y) * 60 + 30 * x+ getCameraY());
-                }
-                else {
-                    gc.drawImage(images.getImage("desert"), (x) * 52 + getCameraX(), (y) * 60 + 30 * x + getCameraY());
-                    gc.drawImage(images.getImage("desert"), (-x) * 52 + getCameraX(), (y) * 60 + 30 * x + getCameraY());
-                }
-            }
-            numTiles--;
-        }
     }
+
 
     public void draw() {
         GraphicsContext gc = getMapCanvas().getGraphicsContext2D(); // Clears whatever is currently on the canvas
@@ -89,19 +72,16 @@ public class MapView extends Pane{
         gc.fillRect(0,0,getMapCanvas().getWidth(),getMapCanvas().getHeight());
         gc.setFill(Color.WHITE);
 
-        int numTiles = 21;
-        for(int x = 0; x <= 11; x++){
-            for(int y = 0; y <= numTiles; y++){
-                if(x%2!=0){
-                    gc.drawImage(images.getImage("desert"), (x) * 52 + getCameraX(), (y) * 60 + 30 * x + getCameraY());
-                    gc.drawImage(images.getImage("desert"), (-x) * 52 + getCameraX(), (y) * 60 + 30 * x+ getCameraY());
-                }
-                else {
-                    gc.drawImage(images.getImage("desert"), (x) * 52 + getCameraX(), (y) * 60 + 30 * x + getCameraY());
-                    gc.drawImage(images.getImage("desert"), (-x) * 52 + getCameraX(), (y) * 60 + 30 * x + getCameraY());
+        gc.drawImage(images.getImage("cursor"), 200, 200);
+
+        //gc.drawImage(images.getImage("desert"), 11*52, (3*60));
+        int size = 10;
+        for(int x = -size; x <= size; x++){
+            for(int y = -size; y <= size; y++){
+                if(x+y<=size && x+y>=-size) {
+                    gc.drawImage(images.getImage("empty"), (x + 11) * 52 + getCameraX(), (y + 3) * 60 + (30 * x) + getCameraY());
                 }
             }
-            numTiles--;
         }
     }
 
@@ -131,7 +111,7 @@ public class MapView extends Pane{
         }
     }
     public void moveCameraDown() {
-        if (getCameraY() - getCameraSpeed() < getMaxCameraYBound()) {
+        if (getCameraY() - getCameraSpeed() < getMinCameraYBound()) {
             setCameraY(getMaxCameraYBound());
         }
         else {
@@ -188,7 +168,6 @@ public class MapView extends Pane{
     }
     private boolean canMoveCameraLeft(double mousePositionX) {
         if (mousePositionX < getMinMapXBound()) {
-            System.out.println("hi");
             return true;
         }
         return false;
